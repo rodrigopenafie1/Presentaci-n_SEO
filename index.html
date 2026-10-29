@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SEO Repuestos SpA · Presentación Corporativa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
+<!-- Librerías estables de exportación -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<style>
+:root{
+  --black:#141416;
+  --yellow:#ffcc00;
+  --yellow-glow:rgba(255,204,0,.25);
+  --gray:#f4f5f7;
+  --dgray:#232326;
+  --bgpage:#0d0e11;
+  --ui:#1f2024;
+  --uiink:#f4f5f7;
+  --h:'Montserrat','Arial Black',Arial,sans-serif;
+  --b:'Inter','Helvetica Neue',Arial,sans-serif;
+  color-scheme:dark;
+  box-sizing:border-box;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bgpage);font-family:var(--b);color:var(--black);overflow-x:hidden}
+
+/* Barra superior fija con controladores limpios */
+.bar{position:sticky;top:0;z-index:999;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(20,20,22,.96);backdrop-filter:blur(8px);border-bottom:1px solid #2d2e33;color:#fff}
+.bar b{font:900 1.02rem var(--h);color:var(--yellow);letter-spacing:.02em}
+.bar small{display:block;color:#9ca3af;font-size:.75rem}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{font:800 .85rem var(--b);padding:.65em 1.15em;border-radius:6px;border:0;cursor:pointer;background:var(--yellow);color:#141416;transition:all .2s ease;box-shadow:0 2px 8px rgba(255,204,0,.25);display:inline-flex;align-items:center;gap:6px}
+.btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(255,204,0,.45)}
+.btn.alt{background:#232326;color:#e5e7eb;border:1px solid #3f3f46;box-shadow:none}
+.btn.alt:hover{background:#2d2d2d;color:#fff;border-color:var(--yellow)}
+.btn.accent{background:transparent;color:var(--yellow);border:1.5px solid var(--yellow)}
+.btn.accent:hover{background:var(--yellow);color:var(--black)}
+.btn:disabled{opacity:.5;cursor:wait;transform:none}
+
+/* Escenario y páginas A4 apaisadas (297x210 mm) con balance vertical optimizado. */
+.stage{padding:24px 0;zoom:var(--z,1);transition:transform .3s ease}
+.page{width:297mm;height:210mm;position:relative;overflow:hidden;background:#fff;margin:0 auto 28px;padding:22mm 20mm 14mm;display:flex;flex-direction:column;justify-content:center;box-shadow:0 12px 36px rgba(0,0,0,.6);break-after:page}
+.page::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;background:repeating-linear-gradient(45deg,var(--yellow) 0 10px,var(--black) 10px 20px);z-index:4}
+.dark{background:var(--black);color:#fff}.yel{background:var(--yellow)}.gry{background:var(--gray)}
+
+/* Pie institucional en páginas internas */
+.page:not(.cover)::before{content:"SEO REPUESTOS SPA · +56 9 9255 0408 · solmedo@seorepuestos.cl · www.seorepuestos.cl"!important;position:absolute;left:20mm;bottom:13px;font:600 10px var(--b);letter-spacing:.04em;opacity:.7;z-index:5}
+.cover{padding:0!important;display:block!important}
+
+/* Logotipo rectangular con margen superior optimizado */
+.brand-logo{position:absolute;left:20mm;top:7mm;width:50mm;height:13.5mm;overflow:hidden;background-color:var(--black);border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.25);display:block;z-index:10}
+.brand-logo img{width:100%;height:100%;object-fit:cover;object-position:center 48.8%;display:block}
+
+/* Paginación suprimida */
+.pn{display:none!important}
+
+/* Tipografía */
+h1,h2,h3{font-family:var(--h);text-transform:uppercase}
+h1{font-weight:900;font-style:italic;font-size:68px;line-height:1}
+h2{font-weight:900;font-style:italic;font-size:38px;line-height:1.04;margin-bottom:10px;letter-spacing:-.01em;position:relative;z-index:2;white-space:nowrap}
+h3{font-weight:800;font-size:16px;line-height:1.2;position:relative;z-index:2}
+.y{color:var(--yellow)}.lead{font-size:14.5px;line-height:1.48;max-width:178mm;color:#4b5563;position:relative;z-index:2}.dark .lead{color:#d1d5db}
+
+/* Estilo de páginas blancas interiores con respiro para tíldes */
+.page:not(.cover):not(.yel):not(.dark){justify-content:flex-start;padding-top:26mm;background:#fff;color:var(--black)}
+.page:not(.cover):not(.yel):not(.dark) h2::after{content:"";display:block;width:64px;height:6px;background:var(--yellow);margin-top:6px;border-radius:2px}
+
+/* ===================================================
+   FONDOS VECTORIALES CONSISTENTES (MARCAS DE AGUA)
+   =================================================== */
+/* 1. Neumático y aro (Esquina Superior Derecha) */
+.bg-wheel-wrap{position:absolute;right:-18mm;top:-22mm;width:96mm;height:96mm;pointer-events:none;z-index:1}
+.tire-watermark{position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%}
+.ring{position:absolute;inset:6mm;border-radius:50%;border:14px solid var(--yellow);box-shadow:inset 0 0 0 2px #141416, 0 0 0 2px #141416;pointer-events:none}
+.dark .ring{box-shadow:inset 0 0 0 2px #141416, 0 0 0 2px #38383c}
+
+/* 2. Tambor de lubricante con margen equilibrado (Esquina Inferior Izquierda) */
+.bg-drum-wrap{position:absolute;left:8mm;bottom:8mm;width:40mm;height:52mm;pointer-events:none;z-index:1;opacity:.20}
+.bg-drum-wrap svg{width:100%;height:100%;display:block}
+
+/* 3. Disco de freno y engranaje industrial (Esquina Inferior Derecha) */
+.bg-gear-wrap{position:absolute;right:8mm;bottom:8mm;width:42mm;height:50mm;pointer-events:none;z-index:1;opacity:.18}
+.bg-gear-wrap svg{width:100%;height:100%;display:block}
+
+/* Animaciones suaves en Web */
+@keyframes spinWheel{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+@keyframes drumFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
+}
+@keyframes gearPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.02)}
+}
+body:not(.static-mode):not(.exporting) .tire-watermark{
+  animation:spinWheel 90s linear infinite;
+}
+body:not(.static-mode):not(.exporting) .cv-dec-wheel{
+  animation:spinWheel 140s linear infinite;
+}
+body:not(.static-mode):not(.exporting) .drum-watermark{
+  animation:drumFloat 6s ease-in-out infinite;
+}
+body:not(.static-mode):not(.exporting) .gear-watermark{
+  animation:gearPulse 8s ease-in-out infinite;
+}
+
+/* Portada */
+.cv-logo{position:absolute;top:10mm;left:0;right:0;display:flex;justify-content:center;align-items:center;z-index:3}
+.cv-logo-box{width:160mm;height:44mm;overflow:hidden;background-color:var(--black);display:flex;align-items:center;justify-content:center}
+.cv-logo-box img{width:100%;height:100%;object-fit:cover;object-position:center 48.8%;display:block}
+
+.cv-mid{position:absolute;top:56mm!important;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:18px;z-index:3}
+.cv-mid .plus{font:900 italic 132px/.85 var(--h)!important;color:var(--yellow);letter-spacing:-.04em;text-shadow:0 0 35px rgba(255,204,0,.3)}
+.cv-mid h1{font-size:48px!important;line-height:.95}
+
+.cv-sub{position:absolute;top:98mm!important;left:0;right:0;text-align:center;z-index:3}
+.cv-sub b{display:block;font:800 16px var(--h);letter-spacing:.28em;color:#fff}
+.cv-sub span{display:inline-block;margin-top:7px;background:var(--yellow);color:var(--black);font:900 12.5px var(--h);padding:6px 18px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+
+.cv-row{position:absolute;left:10mm;right:10mm;top:124mm!important;height:63mm!important;bottom:auto!important;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;z-index:3}
+.cv-row .slot{height:100%;box-shadow:none;transform:skewX(-7deg);border-radius:4px;overflow:hidden;border:2px solid #2e2e33}
+
+/* Diapositiva 2: Quiénes somos */
+.dest{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px;position:relative;z-index:2}
+.dest div{border:2px solid var(--black);border-radius:6px;padding:14px 14px 14px 64px;position:relative;font-size:12.5px;line-height:1.45;color:#374151;background:#fff;box-shadow:4px 4px 0 var(--yellow);transition:transform .2s ease}
+.dest div:hover{transform:translateY(-2px)}
+.dest b{display:block;font:900 italic 17px var(--h);text-transform:uppercase;color:#000;margin-bottom:3px}
+.dest i{position:absolute;left:12px;top:14px;width:40px;height:40px;border-radius:50%;background:var(--yellow);font:900 16px/40px var(--h);text-align:center;font-style:normal;color:#000}
+.zone{background:var(--yellow);margin-top:10px;padding:10px 16px;border-radius:4px;font-size:12.5px;color:#000;position:relative;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.zone b{font:900 12.5px var(--h);text-transform:uppercase;margin-right:8px}
+.sub{font-size:15px;margin:12px 0 8px;position:relative;z-index:2}
+.prods{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;position:relative;z-index:2}
+.prods div{background:var(--black);color:#fff;padding:13px 12px;border-top:5px solid var(--yellow);border-radius:4px;font-size:12px;min-height:33mm}
+.prods b{display:block;font:800 14px var(--h);text-transform:uppercase;color:var(--yellow);margin-bottom:4px}
+
+/* Diapositiva 3: Vitrina de marcas maximizada */
+.brand-showcase-giant{margin-top:10px;width:100%;height:140mm;background:#fff;border:2.5px solid var(--black);border-radius:8px;padding:12px 20px;display:flex;align-items:center;justify-content:center;box-shadow:8px 8px 0 var(--yellow);position:relative;overflow:hidden;z-index:2}
+.brand-showcase-giant img{width:100%;height:100%;object-fit:contain;display:block}
+
+/* ===================================================
+   DIAPOSITIVAS 4, 5 Y 6: NEUMÁTICOS 2 FILAS x 4 COLUMNAS
+   (8 fotos amplias que llenan el alto, sin espacio blanco muerto)
+   =================================================== */
+.tire-grid-4x2{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px 16px!important;margin-top:10px!important;position:relative;z-index:2}
+.tire-grid-4x2 .slot{height:65mm;background-size:cover;background-position:center;border-radius:6px;border:2px solid var(--black);box-shadow:5px 5px 0 var(--yellow);cursor:pointer;position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
+.tire-grid-4x2 .slot:hover{transform:translateY(-2px);box-shadow:6px 6px 0 var(--black)}
+.tire-grid-4x2 .slot .n,.tire-grid-4x2 .slot .x{display:none!important}
+
+/* Slots interactivos generales */
+.slot{position:relative;background:#232326 repeating-linear-gradient(45deg,transparent 0 12px,rgba(255,204,0,.08) 12px 24px) center/cover no-repeat;cursor:pointer;min-height:0;overflow:visible}
+.slot .n{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--yellow);font:800 12px var(--h);text-align:center;gap:4px;padding:8px}
+.slot .n small{font:500 10px var(--b);color:#9ca3af}
+.slot.full .n{display:none}
+.slot .x{position:absolute;right:4px;top:4px;width:22px;height:22px;border:0;border-radius:50%;background:#000c;color:#fff;cursor:pointer;display:none;font-size:14px;line-height:1;z-index:5}
+.slot.full:hover .x{display:block}
+.slot.over{outline:3px dashed var(--yellow)}
+
+/* ===================================================
+   DIAPOSITIVA 7: CATÁLOGO DESTACADO (Más grande y legible)
+   =================================================== */
+.catalog-list{display:grid;grid-template-columns:1fr 1fr;column-gap:22px;row-gap:0;border-top:2.5px solid var(--black);position:relative;z-index:2;background:#fff;border-radius:6px;overflow:hidden;box-shadow:6px 6px 0 var(--yellow);border:2px solid var(--black);margin-top:8px}
+.catalog-list div{padding:11.5px 15px;border-bottom:1px solid #e5e7eb;border-left:5px solid var(--yellow);line-height:1.35;transition:background .15s ease}
+.catalog-list div:nth-child(4n+2),.catalog-list div:nth-child(4n+3){background:#f9fafb}
+.catalog-list div:hover{background:#fffbeb}
+.catalog-list b{display:block;font:900 13.5px var(--h);text-transform:uppercase;color:#111827;letter-spacing:.02em}
+.catalog-list span{display:block;margin-top:3px;font-size:12px;color:#4b5563;font-weight:600}
+.catalog-bar{margin-top:14px;background:var(--black);color:#fff;border-left:6px solid var(--yellow);border-radius:4px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+.catalog-bar b{font:900 12px var(--h);color:var(--yellow);text-transform:uppercase;letter-spacing:.05em}
+.catalog-bar span{font-size:12px;color:#d1d5db;font-weight:500}
+
+/* ===================================================
+   DIAPOSITIVA 8: REPUESTOS, FILTROS Y FRENOS (2 Cuadros Grandes)
+   =================================================== */
+.rf-2grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:10px;position:relative;z-index:2}
+.rf-card-big{background:#fff;border:2.5px solid var(--black);border-radius:8px;box-shadow:6px 6px 0 var(--yellow);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s ease,box-shadow .2s ease}
+.rf-card-big:hover{transform:translateY(-2px);box-shadow:7px 7px 0 var(--black)}
+.rf-header-big{padding:12px 16px 10px;background:#fff;border-bottom:2px solid var(--black)}
+.rf-badge-big{display:inline-block;background:var(--yellow);color:var(--black);font:900 11px var(--h);padding:3px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.rf-title-big{font:900 italic 18px var(--h);color:var(--black);text-transform:uppercase;margin-bottom:3px}
+.rf-desc-big{font-size:12px;color:#4b5563;line-height:1.4;margin-bottom:8px}
+.rf-brands-big{display:flex;flex-wrap:wrap;gap:6px}
+.rf-tag-big{background:var(--black);color:#fff;font:800 11px var(--h);padding:3px 9px;border-radius:3px;letter-spacing:.03em;text-transform:uppercase}
+.rf-slots-big{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 14px 14px;background:#f9fafb;flex:1}
+.rf-slots-big .slot{height:62mm;border-radius:6px;border:1.5px solid var(--black);box-shadow:4px 4px 0 var(--yellow);background-size:cover;background-position:center}
+.rf-slots-big .slot:hover{box-shadow:4px 4px 0 var(--black)}
+
+.rf-zone{margin-top:12px;background:var(--yellow);padding:10px 18px;border-radius:4px;font-size:12.5px;color:#000;position:relative;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between}
+.rf-zone b{font:900 12px var(--h);text-transform:uppercase;margin-right:8px}
+
+/* Diapositiva 9: Lubricantes */
+.strip.big .slot{height:100mm;border-radius:6px;overflow:hidden;border:2px solid var(--black);box-shadow:6px 6px 0 var(--yellow)}
+.lub-bar{margin-top:14px;background:var(--black);color:#fff;border-left:6px solid var(--yellow);border-radius:4px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2}
+.lub-bar b{font:900 12px var(--h);color:var(--yellow);text-transform:uppercase}
+.lub-bar span{font-size:12px;color:#d1d5db}
+
+/* Diapositiva 10: Contacto & Cierre */
+.page.contact-page{background:var(--black)!important;color:#fff!important;justify-content:flex-start!important;padding-top:26mm!important}
+.contact-page h2{font-size:32px!important;line-height:1.08!important;margin-bottom:6px!important;color:#fff!important;max-width:182mm!important}
+.contact-page h2::after{content:"";display:block;width:56px;height:6px;background:var(--yellow);margin-top:6px}
+.contact-header{margin-bottom:10px;position:relative;z-index:2}
+.contact-pill{display:inline-block;background:var(--yellow);color:var(--black);font:900 10.5px var(--h);padding:3px 10px;border-radius:3px;letter-spacing:.08em;margin-bottom:6px;text-transform:uppercase}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;z-index:2}
+.contact-card{background:#1f2024;border:1.5px solid #323338;border-left:6px solid var(--yellow);border-radius:6px;padding:12px 16px;display:flex;flex-direction:column;justify-content:center}
+.contact-card.highlight{box-shadow:5px 5px 0 var(--yellow);border-color:var(--yellow);background:#25231a}
+.contact-card-badge{display:flex;align-items:center;gap:8px;font:800 11px var(--h);color:var(--yellow);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.contact-icon{width:18px;height:18px;fill:none;stroke:var(--yellow);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.contact-main-val{font:900 italic 23px/1.15 var(--h);color:#fff;letter-spacing:.02em;margin:3px 0 3px}
+.contact-main-val.y{color:var(--yellow)}
+.contact-sub-val{font:500 12px/1.3 var(--b);color:#9ca3af}
+.contact-sub-val b{color:#fff}
+.contact-zone{margin-top:10px;background:#1c1d20;border-left:5px solid var(--yellow);border-radius:4px;padding:9px 14px;font-size:12.5px;color:#d1d5db;display:flex;align-items:center;gap:10px;position:relative;z-index:2}
+.contact-zone b{font:900 11.5px var(--h);color:var(--yellow);text-transform:uppercase;white-space:nowrap}
+.contact-photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px;position:relative;z-index:2}
+.contact-photo-card{position:relative;background:#1f2024;border:2px solid #38383c;border-radius:6px;box-shadow:4px 4px 0 var(--yellow);overflow:hidden;min-width:0}
+.contact-photo-card .slot{height:40mm;box-shadow:none;border-radius:0}
+
+/* ===================================================
+   MODO PRESENTACIÓN PANTALLA COMPLETA
+   =================================================== */
+body.pres-mode{background:#000;overflow:hidden}
+body.pres-mode .bar{position:fixed;top:0;left:0;right:0;background:rgba(10,10,12,.92);z-index:9999}
+body.pres-mode .stage{padding:0;height:100vh;display:flex;align-items:center;justify-content:center}
+body.pres-mode .page{margin:0;display:none}
+body.pres-mode .page.active-slide{display:flex}
+.pres-nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:99999;display:none;gap:12px;background:#18181b;padding:8px 16px;border-radius:30px;border:1.5px solid var(--yellow);box-shadow:0 8px 24px rgba(0,0,0,.7)}
+body.pres-mode .pres-nav{display:flex}
+.pres-nav button{background:transparent;border:0;color:var(--yellow);font:900 15px var(--h);cursor:pointer;padding:4px 12px;border-radius:14px}
+.pres-nav button:hover{background:var(--yellow);color:#000}
+.pres-nav span{color:#fff;font:700 13px/28px var(--h);padding:0 6px}
+
+/* ===================================================
+   MODO ESTÁTICO Y REGLAS DE EXPORTACIÓN
+   =================================================== */
+body.static-mode *,body.static-mode *::before,body.static-mode *::after{
+  animation:none!important;transition:none!important;
+}
+
+@media print{
+  @page{size:297mm 210mm;margin:0}
+  html,body{background:#fff!important;margin:0!important;padding:0!important}
+  .bar,.pres-nav{display:none!important}
+  .stage{zoom:1!important;padding:0!important;margin:0!important}
+  .page{margin:0!important;box-shadow:none!important;border-radius:0!important;page-break-after:always;break-after:page}
+  *{animation:none!important;transition:none!important;transform:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .slot .n,.slot .x{display:none!important}
+}
+
+body.exporting{background:#fff!important;margin:0!important;padding:0!important}
+body.exporting .bar,body.exporting .pres-nav{display:none!important}
+body.exporting .stage{zoom:1!important;padding:0!important;margin:0!important}
+body.exporting .page{margin:0!important;box-shadow:none!important;border-radius:0!important;width:297mm!important;height:210mm!important}
+body.exporting *,body.exporting *::before,body.exporting *::after{animation:none!important;transition:none!important}
+body.exporting .slot .n,body.exporting .slot .x{display:none!important}
+
+/* Notificación flotante */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141416;color:var(--yellow);border:2px solid var(--yellow);padding:10px 24px;border-radius:8px;font:800 13px var(--h);box-shadow:0 8px 30px rgba(0,0,0,.8);z-index:99999;display:none}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<!-- Barra de herramientas limpia -->
+<div class="bar">
+ <div>
+   <b>SEO REPUESTOS · Brochure Corporativo</b>
+   <small>A4 Apaisado · 10 Hojas · Optimizado para flotas, minería y transporte</small>
+ </div>
+ <div class="tools">
+  <button class="btn accent" id="togglePres">Modo Presentación (F5)</button>
+  <button class="btn alt" id="toggleAnim">Animaciones: ON</button>
+  <button class="btn" id="pdf">Exportar a PDF</button>
+  <button class="btn alt" id="pptx">Exportar a PPTX</button>
+  <button class="btn alt" onclick="window.print()">Imprimir</button>
+ </div>
+</div>
+
+<!-- Controles del Modo Presentación en pantalla -->
+<div class="pres-nav" id="presNav">
+  <button id="pPrev">◀ Anterior</button>
+  <span id="pCount">1 / 10</span>
+  <button id="pNext">Siguiente ▶</button>
+  <button id="pExit" style="color:#ef4444">Salir ✕</button>
+</div>
+
+<main class="stage" id="stage">
+
+<!-- ===================================================
+     DIAPOSITIVA 1: PORTADA
+     =================================================== -->
+<section class="page dark cover">
+ <svg class="dec cv-dec-wheel" viewBox="0 0 200 200" style="left:50%;top:-35mm;width:240mm;height:240mm;margin-left:-120mm;opacity:.14;position:absolute;pointer-events:none;transform-origin:50% 50%">
+  <circle cx="100" cy="100" r="98" fill="#0d0d0d" stroke="#ffcc00" stroke-width="2"/>
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#2d2d2d" stroke-width="16" stroke-dasharray="9 6"/>
+  <circle cx="100" cy="100" r="70" fill="#1f1f1f"/>
+  <circle cx="100" cy="100" r="48" fill="#ffcc00"/>
+  <circle cx="100" cy="100" r="39" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+  <circle cx="100" cy="100" r="13" fill="#1a1a1a"/>
+  <g fill="#1a1a1a"><circle cx="124" cy="100" r="4"/><circle cx="107.4" cy="122.8" r="4"/><circle cx="80.6" cy="114.1" r="4"/><circle cx="80.6" cy="85.9" r="4"/><circle cx="107.4" cy="77.2" r="4"/></g>
+ </svg>
+ <div class="cv-logo">
+   <div class="cv-logo-box">
+     <img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos">
+   </div>
+ </div>
+ <div class="cv-mid"><div class="plus">+10</div><h1>Años de<br><span class="y">experiencia</span></h1></div>
+ <div class="cv-sub"><b>Respuesta rápida y oportuna a tus requerimientos</b><span>Las mejores marcas, en stock</span></div>
+ <div class="cv-row">
+   <div class="slot" data-g="cov" data-default="imagenes/fotos_seo/1.jpg"></div>
+   <div class="slot" data-g="cov" data-default="imagenes/fotos_seo/2.jpg"></div>
+   <div class="slot" data-g="cov" data-default="imagenes/fotos_seo/3.jpg"></div>
+   <div class="slot" data-g="cov" data-default="imagenes/fotos_seo/4.jpg"></div>
+ </div>
+</section>
+
+<!-- ===================================================
+     DIAPOSITIVA 2: QUIÉNES SOMOS
+     =================================================== -->
+<section class="page">
+ <div class="brand-logo"><img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos"></div>
+ <!-- Esquina Superior Derecha: Neumático + Aro -->
+ <div class="bg-wheel-wrap">
+   <svg class="tire-watermark" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="98" fill="none" stroke="#d5d7de" stroke-width="3"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#e2e4e9" stroke-width="15" stroke-dasharray="10 5"/>
+    <circle cx="100" cy="100" r="76" fill="#e8eaee"/>
+    <circle cx="100" cy="100" r="66" fill="#f1f3f6"/>
+    <circle cx="100" cy="100" r="46" fill="#fef5d0" stroke="#f6e082" stroke-width="2"/>
+    <circle cx="100" cy="100" r="36" fill="none" stroke="#edd46c" stroke-width="2" stroke-dasharray="4 3"/>
+    <circle cx="100" cy="100" r="15" fill="#dfe2e8"/>
+    <g fill="#9ca3af"><circle cx="100" cy="74" r="5"/><circle cx="124.7" cy="92" r="5"/><circle cx="115.3" cy="121" r="5"/><circle cx="84.7" cy="121" r="5"/><circle cx="75.3" cy="92" r="5"/></g>
+   </svg>
+   <div class="ring"></div>
+ </div>
+ <!-- Esquina Inferior Izquierda: Tambor de Lubricante con margen separado del borde -->
+ <div class="bg-drum-wrap">
+   <svg class="drum-watermark" viewBox="0 0 160 200" fill="none">
+     <ellipse cx="80" cy="174" rx="58" ry="14" fill="#000" opacity="0.08"/>
+     <path d="M22 36 V170 C22 178 48 184 80 184 C112 184 138 178 138 170 V36" fill="#f8fafc" stroke="#141416" stroke-width="3"/>
+     <path d="M22 166 C22 174 48 180 80 180 C112 180 138 174 138 166" stroke="#9ca3af" stroke-width="3"/>
+     <path d="M20 120 C20 129 47 136 80 136 C113 136 140 129 140 120" stroke="#141416" stroke-width="4.5" stroke-linecap="round"/>
+     <path d="M22 120 C22 128 48 134 80 134 C112 134 138 128 138 120" stroke="#ffcc00" stroke-width="2.5"/>
+     <path d="M20 82 C20 91 47 98 80 98 C113 98 140 91 140 82" stroke="#141416" stroke-width="4.5" stroke-linecap="round"/>
+     <path d="M22 82 C22 90 48 96 80 96 C112 96 138 90 138 82" stroke="#ffcc00" stroke-width="2.5"/>
+     <ellipse cx="80" cy="36" rx="58" ry="15" fill="#f1f3f6" stroke="#141416" stroke-width="3.5"/>
+     <ellipse cx="80" cy="36" rx="50" ry="12" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2"/>
+     <circle cx="56" cy="36" r="8" fill="#ffcc00" stroke="#141416" stroke-width="2"/>
+     <circle cx="56" cy="36" r="3.5" fill="#141416"/>
+     <circle cx="106" cy="32" r="5" fill="#d1d5db" stroke="#141416" stroke-width="1.8"/>
+     <circle cx="106" cy="32" r="2" fill="#141416"/>
+     <g transform="translate(80, 101)" stroke="#141416" stroke-width="2" fill="#ffcc00">
+       <path d="M0 -11 C-6 -2 -8 2 -8 6 A8 8 0 0 0 8 6 C8 2 6 -2 0 -11 Z" stroke-linejoin="round"/>
+       <path d="M-2 4 A3 3 0 0 1 -4 1.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+     </g>
+     <line x1="36" y1="48" x2="36" y2="74" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+     <line x1="36" y1="90" x2="36" y2="112" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+   </svg>
+ </div>
+ <!-- Esquina Inferior Derecha: Disco de Freno Ventilado y Engranaje Técnico -->
+ <div class="bg-gear-wrap">
+   <svg class="gear-watermark" viewBox="0 0 170 190" fill="none">
+     <circle cx="85" cy="95" r="72" stroke="#141416" stroke-width="3.5" stroke-dasharray="14 7" fill="#f8fafc"/>
+     <circle cx="85" cy="95" r="56" stroke="#9ca3af" stroke-width="2" fill="#f1f3f6"/>
+     <circle cx="85" cy="95" r="42" stroke="#141416" stroke-width="3" fill="#ffffff"/>
+     <circle cx="85" cy="95" r="22" fill="#ffcc00" stroke="#141416" stroke-width="2.5"/>
+     <circle cx="85" cy="95" r="8" fill="#141416"/>
+     <g fill="#141416">
+       <circle cx="85" cy="62" r="4"/>
+       <circle cx="116" cy="85" r="4"/>
+       <circle cx="104" cy="120" r="4"/>
+       <circle cx="66" cy="120" r="4"/>
+       <circle cx="54" cy="85" r="4"/>
+     </g>
+     <path d="M28 35 C38 20 60 14 85 14 C110 14 132 20 142 35 L132 50 C120 42 105 38 85 38 C65 38 50 42 38 50 Z" fill="#ffcc00" stroke="#141416" stroke-width="2.5"/>
+   </svg>
+ </div> 
+
+ <h2>Quiénes somos</h2>
+ <p class="lead" style="max-width:178mm;font-size:15px;color:#333">SEO REPUESTOS SPA es una empresa regional del área de repuestos para vehículos de transporte de pasajeros y carga. Comenzamos en marzo de 2016 y hoy tenemos más de 10 años de experiencia acompañando a nuestros clientes de la cuarta y tercera región.</p>
+ <h3 class="sub">Llevamos los productos hasta donde los necesites</h3>
+ <div class="dest">
+   <div><i>01</i><b>En terreno</b>Tenemos presencia diaria en terreno para atenderte donde estés.</div>
+   <div><i>02</i><b>En faena</b>Llevamos neumáticos, lubricantes y repuestos hasta tu faena para que tu maquinaria siga trabajando.</div>
+   <div><i>03</i><b>En carretera</b>Llevamos lo que necesitas a donde estés, también en ruta, para que tu flota no se detenga.</div>
+ </div>
+ <div class="zone"><b>Cobertura</b>Cuarta y tercera región: La Serena, Coquimbo, Vallenar, Freirina, Huasco, Vicuña, Ovalle y alrededores.</div>
+ <h3 class="sub">Con qué productos trabajamos</h3>
+ <div class="prods">
+   <div><b>Neumáticos y cámaras</b>Para todo tipo de vehículos.</div>
+   <div><b>Lubricantes</b>Mobil y Esso.</div>
+   <div><b>Repuestos</b>Mercedes Benz, Volvo y Scania.</div>
+   <div><b>Filtros</b>Tecfil, Fleetguard y otras marcas.</div>
+   <div><b>Frenos</b>Pastillas y balatas Frasle y Cobreq.</div>
+ </div>
+</section>
+
+<!-- ===================================================
+     DIAPOSITIVA 3: NUESTRAS MARCAS
+     =================================================== -->
+<section class="page">
+ <div class="brand-logo"><img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos"></div>
+ <div class="bg-wheel-wrap">
+   <svg class="tire-watermark" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="98" fill="none" stroke="#d5d7de" stroke-width="3"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#e2e4e9" stroke-width="15" stroke-dasharray="10 5"/>
+    <circle cx="100" cy="100" r="76" fill="#e8eaee"/>
+    <circle cx="100" cy="100" r="66" fill="#f1f3f6"/>
+    <circle cx="100" cy="100" r="46" fill="#fef5d0" stroke="#f6e082" stroke-width="2"/>
+    <circle cx="100" cy="100" r="36" fill="none" stroke="#edd46c" stroke-width="2" stroke-dasharray="4 3"/>
+    <circle cx="100" cy="100" r="15" fill="#dfe2e8"/>
+    <g fill="#9ca3af"><circle cx="100" cy="74" r="5"/><circle cx="124.7" cy="92" r="5"/><circle cx="115.3" cy="121" r="5"/><circle cx="84.7" cy="121" r="5"/><circle cx="75.3" cy="92" r="5"/></g>
+   </svg>
+   <div class="ring"></div>
+ </div>
+ <div class="bg-drum-wrap">
+   <svg class="drum-watermark" viewBox="0 0 160 200" fill="none">
+     <ellipse cx="80" cy="174" rx="58" ry="14" fill="#000" opacity="0.08"/>
+     <path d="M22 36 V170 C22 178 48 184 80 184 C112 184 138 170 138 170 V36" fill="#f8fafc" stroke="#141416" stroke-width="3"/>
+     <path d="M20 120 C20 129 47 136 80 136 C113 136 140 129 140 120" stroke="#141416" stroke-width="4.5"/>
+     <path d="M22 120 C22 128 48 134 80 134 C112 134 138 128 138 120" stroke="#ffcc00" stroke-width="2.5"/>
+     <path d="M20 82 C20 91 47 98 80 98 C113 98 140 91 140 82" stroke="#141416" stroke-width="4.5"/>
+     <path d="M22 82 C22 90 48 96 80 96 C112 96 138 90 138 82" stroke="#ffcc00" stroke-width="2.5"/>
+     <ellipse cx="80" cy="36" rx="58" ry="15" fill="#f1f3f6" stroke="#141416" stroke-width="3.5"/>
+     <circle cx="56" cy="36" r="8" fill="#ffcc00" stroke="#141416" stroke-width="2"/>
+   </svg>
+ </div>
+ <div class="bg-gear-wrap">
+   <svg class="gear-watermark" viewBox="0 0 170 190" fill="none">
+     <circle cx="85" cy="95" r="72" stroke="#141416" stroke-width="3.5" stroke-dasharray="14 7" fill="#f8fafc"/>
+     <circle cx="85" cy="95" r="42" stroke="#141416" stroke-width="3" fill="#ffffff"/>
+     <circle cx="85" cy="95" r="22" fill="#ffcc00" stroke="#141416" stroke-width="2.5"/>
+     <circle cx="85" cy="95" r="8" fill="#141416"/>
+   </svg>
+ </div>
+ <h2>Neumáticos: nuestras marcas</h2>
+ <div class="brand-showcase-giant">
+   <img src="https://www.cargasespeciales.com/imagenes/logos_neumaticos.jpg" alt="Marcas de Neumáticos SEO Repuestos">
+ </div>
+</section>
+
+<!-- ===================================================
+     DIAPOSITIVA 4: NEUMÁTICOS PARA CADA VEHÍCULO (2x4, 8 fotos)
+     =================================================== -->
+<section class="page">
+ <div class="brand-logo"><img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos"></div>
+ <div class="bg-wheel-wrap">
+   <svg class="tire-watermark" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="98" fill="none" stroke="#d5d7de" stroke-width="3"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#e2e4e9" stroke-width="15" stroke-dasharray="10 5"/>
+    <circle cx="100" cy="100" r="76" fill="#e8eaee"/>
+    <circle cx="100" cy="100" r="46" fill="#fef5d0" stroke="#f6e082" stroke-width="2"/>
+    <circle cx="100" cy="100" r="15" fill="#dfe2e8"/>
+    <g fill="#9ca3af"><circle cx="100" cy="74" r="5"/><circle cx="124.7" cy="92" r="5"/><circle cx="115.3" cy="121" r="5"/><circle cx="84.7" cy="121" r="5"/><circle cx="75.3" cy="92" r="5"/></g>
+   </svg>
+   <div class="ring"></div>
+ </div>
+ <div class="bg-drum-wrap">
+   <svg class="drum-watermark" viewBox="0 0 160 200" fill="none">
+     <path d="M22 36 V170 C22 178 48 184 80 184 C112 184 138 178 138 170 V36" fill="#f8fafc" stroke="#141416" stroke-width="3"/>
+     <path d="M20 120 C20 129 47 136 80 136 C113 136 140 129 140 120" stroke="#141416" stroke-width="4.5"/>
+     <ellipse cx="80" cy="36" rx="58" ry="15" fill="#f1f3f6" stroke="#141416" stroke-width="3.5"/>
+     <circle cx="56" cy="36" r="8" fill="#ffcc00" stroke="#141416" stroke-width="2"/>
+   </svg>
+ </div>
+ <div class="bg-gear-wrap">
+   <svg class="gear-watermark" viewBox="0 0 170 190" fill="none">
+     <circle cx="85" cy="95" r="72" stroke="#141416" stroke-width="3.5" stroke-dasharray="14 7" fill="#f8fafc"/>
+     <circle cx="85" cy="95" r="22" fill="#ffcc00" stroke="#141416" stroke-width="2.5"/>
+   </svg>
+ </div>
+ <h2>Neumáticos para cada vehículo</h2>
+ <div class="tire-grid-4x2">
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/1.jpg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/2.jpg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/3.jpg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/4.jpg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/5.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/6.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/7.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/8.jpeg"></div>
+ </div>
+</section>
+
+<!-- ===================================================
+     DIAPOSITIVA 5: AMPLIO STOCK DE NEUMÁTICOS (2x4, 8 fotos)
+     =================================================== -->
+<section class="page">
+ <div class="brand-logo"><img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos"></div>
+ <div class="bg-wheel-wrap">
+   <svg class="tire-watermark" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="98" fill="none" stroke="#d5d7de" stroke-width="3"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#e2e4e9" stroke-width="15" stroke-dasharray="10 5"/>
+    <circle cx="100" cy="100" r="76" fill="#e8eaee"/>
+    <circle cx="100" cy="100" r="46" fill="#fef5d0" stroke="#f6e082" stroke-width="2"/>
+    <circle cx="100" cy="100" r="15" fill="#dfe2e8"/>
+    <g fill="#9ca3af"><circle cx="100" cy="74" r="5"/><circle cx="124.7" cy="92" r="5"/><circle cx="115.3" cy="121" r="5"/><circle cx="84.7" cy="121" r="5"/><circle cx="75.3" cy="92" r="5"/></g>
+   </svg>
+   <div class="ring"></div>
+ </div>
+ <div class="bg-drum-wrap">
+   <svg class="drum-watermark" viewBox="0 0 160 200" fill="none">
+     <path d="M22 36 V170 C22 178 48 184 80 184 C112 184 138 178 138 170 V36" fill="#f8fafc" stroke="#141416" stroke-width="3"/>
+     <ellipse cx="80" cy="36" rx="58" ry="15" fill="#f1f3f6" stroke="#141416" stroke-width="3.5"/>
+     <circle cx="56" cy="36" r="8" fill="#ffcc00" stroke="#141416" stroke-width="2"/>
+   </svg>
+ </div>
+ <div class="bg-gear-wrap">
+   <svg class="gear-watermark" viewBox="0 0 170 190" fill="none">
+     <circle cx="85" cy="95" r="72" stroke="#141416" stroke-width="3.5" stroke-dasharray="14 7" fill="#f8fafc"/>
+     <circle cx="85" cy="95" r="22" fill="#ffcc00" stroke="#141416" stroke-width="2.5"/>
+   </svg>
+ </div>
+ <h2>Amplio stock de neumáticos</h2>
+ <div class="tire-grid-4x2">
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/9.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/10.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/11.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/12.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/13.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/14.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/15.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/16.jpeg"></div>
+ </div>
+</section>
+
+<!-- ===================================================
+     DIAPOSITIVA 6: MODELOS Y MEDIDAS EN STOCK (2x4, 8 fotos)
+     =================================================== -->
+<section class="page">
+ <div class="brand-logo"><img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos"></div>
+ <div class="bg-wheel-wrap">
+   <svg class="tire-watermark" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="98" fill="none" stroke="#d5d7de" stroke-width="3"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#e2e4e9" stroke-width="15" stroke-dasharray="10 5"/>
+    <circle cx="100" cy="100" r="76" fill="#e8eaee"/>
+    <circle cx="100" cy="100" r="46" fill="#fef5d0" stroke="#f6e082" stroke-width="2"/>
+    <circle cx="100" cy="100" r="15" fill="#dfe2e8"/>
+    <g fill="#9ca3af"><circle cx="100" cy="74" r="5"/><circle cx="124.7" cy="92" r="5"/><circle cx="115.3" cy="121" r="5"/><circle cx="84.7" cy="121" r="5"/><circle cx="75.3" cy="92" r="5"/></g>
+   </svg>
+   <div class="ring"></div>
+ </div>
+ <div class="bg-drum-wrap">
+   <svg class="drum-watermark" viewBox="0 0 160 200" fill="none">
+     <path d="M22 36 V170 C22 178 48 184 80 184 C112 184 138 178 138 170 V36" fill="#f8fafc" stroke="#141416" stroke-width="3"/>
+     <ellipse cx="80" cy="36" rx="58" ry="15" fill="#f1f3f6" stroke="#141416" stroke-width="3.5"/>
+     <circle cx="56" cy="36" r="8" fill="#ffcc00" stroke="#141416" stroke-width="2"/>
+   </svg>
+ </div>
+ <div class="bg-gear-wrap">
+   <svg class="gear-watermark" viewBox="0 0 170 190" fill="none">
+     <circle cx="85" cy="95" r="72" stroke="#141416" stroke-width="3.5" stroke-dasharray="14 7" fill="#f8fafc"/>
+     <circle cx="85" cy="95" r="22" fill="#ffcc00" stroke="#141416" stroke-width="2.5"/>
+   </svg>
+ </div>
+ <h2>Modelos y medidas en stock</h2>
+ <div class="tire-grid-4x2">
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/17.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/18.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/19.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/20.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/21.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/22.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/23.jpeg"></div>
+   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/24.jpeg"></div>
+ </div>
+</section>
+
+<!-- ===================================================
+     DIAPOSITIVA 7: CATÁLOGO DESTACADO (Más Grande, Legible y Equilibrado)
+     =================================================== -->
+<section class="page catalog-page">
+ <div class="brand-logo"><img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos"></div>
+ <div class="bg-wheel-wrap">
+   <svg class="tire-watermark" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="98" fill="none" stroke="#d5d7de" stroke-width="3"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#e2e4e9" stroke-width="15" stroke-dasharray="10 5"/>
+    <circle cx="100" cy="100" r="76" fill="#e8eaee"/>
+    <circle cx="100" cy="100" r="46" fill="#fef5d0" stroke="#f6e082" stroke-width="2"/>
+    <circle cx="100" cy="100" r="15" fill="#dfe2e8"/>
+    <g fill="#9ca3af"><circle cx="100" cy="74" r="5"/><circle cx="124.7" cy="92" r="5"/><circle cx="115.3" cy="121" r="5"/><circle cx="84.7" cy="121" r="5"/><circle cx="75.3" cy="92" r="5"/></g>
+   </svg>
+   <div class="ring"></div>
+ </div>
+ <div class="bg-drum-wrap">
+   <svg class="drum-watermark" viewBox="0 0 160 200" fill="none">
+     <path d="M22 36 V170 C22 178 48 184 80 184 C112 184 138 178 138 170 V36" fill="#f8fafc" stroke="#141416" stroke-width="3"/>
+     <ellipse cx="80" cy="36" rx="58" ry="15" fill="#f1f3f6" stroke="#141416" stroke-width="3.5"/>
+     <circle cx="56" cy="36" r="8" fill="#ffcc00" stroke="#141416" stroke-width="2"/>
+   </svg>
+ </div>
+ <div class="bg-gear-wrap">
+   <svg class="gear-watermark" viewBox="0 0 170 190" fill="none">
+     <circle cx="85" cy="95" r="72" stroke="#141416" stroke-width="3.5" stroke-dasharray="14 7" fill="#f8fafc"/>
+     <circle cx="85" cy="95" r="22" fill="#ffcc00" stroke="#141416" stroke-width="2.5"/>
+   </svg>
+ </div>
+ <h2>Catálogo destacado</h2>
+
+ <div class="catalog-list">
+  <div><b>SUPERMEALLIR SM994</b><span>295/80R22.5 · 18 telas · Direccional rodado libre</span></div>
+  <div><b>SUPERMEALLIR SM997</b><span>11R22.5 · 18 telas · Direccional mixto</span></div>
+  <div><b>SUPERMEALLIR SM998</b><span>295/80R22.5 · 18 telas · Tracción mixto</span></div>
+  <div><b>SUPERMEALLIR SUPER92</b><span>295/80R22.5 · 18 telas · Tracción faena</span></div>
+  <div><b>HAIDA HD776</b><span>11R22.5 y 12R22.5 · 18 telas · Tracción faena</span></div>
+  <div><b>MAXWIND MAX99</b><span>295/80R22.5 · 18 telas · Dirección carretera</span></div>
+  <div><b>MAXWIND MAX96 / WM887</b><span>295/80R22.5 · 18 telas · Tracción carretera</span></div>
+  <div><b>AEOLUS ASR69</b><span>295/80R22.5 · 18 PR · Dirección carretera</span></div>
+  <div><b>COPARTNER CP776</b><span>1200R24 · 22 telas · Tracción faena</span></div>
+  <div><b>COPARTNER CP762 / CP183</b><span>13R22.5 · 18 / 20 telas</span></div>
+  <div><b>COPARTNER CP928</b><span>275/70R22.5 · 18 telas · Lineal</span></div>
+  <div><b>TRIANGLE TR685 / COPARTNER CP985</b><span>215/75R17.5 y 235/75R17.5 · Toda posición</span></div>
+  <div><b>TOTAL TRUST R4-1 / R4-2</b><span>12.5/80-18 y 19.5L24 · R4 industrial</span></div>
+  <div><b>LÍNEA AGRO & FAENA</b><span>Consulte medidas y compuestos reforzados</span></div>
+ </div>
+
+ <div class="catalog-bar">
+   <div><b>Disponibilidad Inmediata & Entrega en Terreno:</b> </div>
+   <b style="color:#fff">Cuarta y Tercera Región</b>
+ </div>
+</section>
+
+<!-- ===================================================
+     DIAPOSITIVA 8: REPUESTOS, FILTROS Y FRENOS (2 Cuadros Grandes)
+     =================================================== -->
+<section class="page rf-page">
+ <div class="brand-logo"><img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos"></div>
+ <div class="bg-wheel-wrap">
+   <svg class="tire-watermark" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="98" fill="none" stroke="#d5d7de" stroke-width="3"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#e2e4e9" stroke-width="15" stroke-dasharray="10 5"/>
+    <circle cx="100" cy="100" r="76" fill="#e8eaee"/>
+    <circle cx="100" cy="100" r="46" fill="#fef5d0" stroke="#f6e082" stroke-width="2"/>
+    <circle cx="100" cy="100" r="15" fill="#dfe2e8"/>
+    <g fill="#9ca3af"><circle cx="100" cy="74" r="5"/><circle cx="124.7" cy="92" r="5"/><circle cx="115.3" cy="121" r="5"/><circle cx="84.7" cy="121" r="5"/><circle cx="75.3" cy="92" r="5"/></g>
+   </svg>
+   <div class="ring"></div>
+ </div>
+ <div class="bg-drum-wrap">
+   <svg class="drum-watermark" viewBox="0 0 160 200" fill="none">
+     <path d="M22 36 V170 C22 178 48 184 80 184 C112 184 138 178 138 170 V36" fill="#f8fafc" stroke="#141416" stroke-width="3"/>
+     <ellipse cx="80" cy="36" rx="58" ry="15" fill="#f1f3f6" stroke="#141416" stroke-width="3.5"/>
+     <circle cx="56" cy="36" r="8" fill="#ffcc00" stroke="#141416" stroke-width="2"/>
+   </svg>
+ </div>
+ <div class="bg-gear-wrap">
+   <svg class="gear-watermark" viewBox="0 0 170 190" fill="none">
+     <circle cx="85" cy="95" r="72" stroke="#141416" stroke-width="3.5" stroke-dasharray="14 7" fill="#f8fafc"/>
+     <circle cx="85" cy="95" r="22" fill="#ffcc00" stroke="#141416" stroke-width="2.5"/>
+   </svg>
+ </div> 
+ <h2>Repuestos, filtros y frenos</h2>
+ <!-- Nombramiento de repuestos Mercedes Benz, Volvo y Scania en la descripción de componentes -->
+ <p class="lead" style="max-width:178mm;font-size:14.5px;color:#374151;margin-top:-4px">Contamos con repuestos para marcas como <b>MERCEDES BENZ</b>, <b>VOLVO</b> Y <b>SCANIA</b>, filtros para todo tipo de vehículos en las marcas <b>TECFIL</b> – <b>FLEETGUARD</b> entre otras. Disponemos también detoda la línea de pastillas y balatas marca <b>FRASLE</b> y <b>COBREQ</b> (Brasil).</p>
+
+ <div class="rf-2grid">
+   <!-- Cuadro 1: SEGURIDAD (Filtros para todo tipo de vehículos) -->
+   <div class="rf-card-big">
+     <div class="rf-header-big">
+       <span class="rf-badge-big">Filtración Total</span>
+       <h3 class="rf-title-big">Seguridad</h3>
+       <p class="rf-desc-big">Sistemas de aire, aceite, combustible y refrigerante de alto flujo para protección de motor.</p>
+       <div class="rf-brands-big">
+         <span class="rf-tag-big">Tecfil</span>
+         <span class="rf-tag-big">Fleetguard</span>
+         <span class="rf-tag-big">Donaldson</span>
+       </div>
+     </div>
+     <div class="rf-slots-big">
+       <div class="slot" data-g="flt" data-default="imagenes/fotos_seo/filtro_tecfil.jpg"></div>
+       <div class="slot" data-g="flt" data-default="imagenes/fotos_seo/filtro_fleetguard.jpg"></div>
+     </div>
+   </div>
+
+   <!-- Cuadro 2: PASTILLAS Y BALATAS (Fricción y Freno Seguro) -->
+   <div class="rf-card-big">
+     <div class="rf-header-big">
+       <span class="rf-badge-big">Seguridad y Fricción</span>
+       <h3 class="rf-title-big">Pastillas y Balatas</h3>
+       <p class="rf-desc-big">Pastillas y balatas de máxima resistencia térmica y agarre seguro para servicio pesado.</p>
+       <div class="rf-brands-big">
+         <span class="rf-tag-big">Frasle</span>
+         <span class="rf-tag-big">Cobreq (Brasil)</span>
+       </div>
+     </div>
+     <div class="rf-slots-big">
+       <div class="slot" data-g="frn" data-default="imagenes/fotos_seo/balata_frasle.jpg"></div>
+       <div class="slot" data-g="frn" data-default="imagenes/fotos_seo/balata_cobreq.jpg"></div>
+     </div>
+   </div>
+ </div>
+
+ <div class="rf-zone">
+   <div><b>Disponible inmediata y entrega en terreno:</b> </div>
+   <div style="font:800 12px var(--h);color:var(--black);text-transform:uppercase;letter-spacing:.04em">Cuarta y Tercero Región</div>
+ </div>
+</section>
+
+<!-- ===================================================
+     DIAPOSITIVA 9: LUBRICANTES MOBIL Y ESSO
+     =================================================== -->
+<section class="page">
+ <div class="brand-logo"><img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos"></div>
+ <div class="bg-wheel-wrap">
+   <svg class="tire-watermark" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="98" fill="none" stroke="#d5d7de" stroke-width="3"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#e2e4e9" stroke-width="15" stroke-dasharray="10 5"/>
+    <circle cx="100" cy="100" r="76" fill="#e8eaee"/>
+    <circle cx="100" cy="100" r="46" fill="#fef5d0" stroke="#f6e082" stroke-width="2"/>
+    <circle cx="100" cy="100" r="15" fill="#dfe2e8"/>
+    <g fill="#9ca3af"><circle cx="100" cy="74" r="5"/><circle cx="124.7" cy="92" r="5"/><circle cx="115.3" cy="121" r="5"/><circle cx="84.7" cy="121" r="5"/><circle cx="75.3" cy="92" r="5"/></g>
+   </svg>
+   <div class="ring"></div>
+ </div>
+ <div class="bg-drum-wrap">
+   <svg class="drum-watermark" viewBox="0 0 160 200" fill="none">
+     <path d="M22 36 V170 C22 178 48 184 80 184 C112 184 138 178 138 170 V36" fill="#f8fafc" stroke="#141416" stroke-width="3"/>
+     <ellipse cx="80" cy="36" rx="58" ry="15" fill="#f1f3f6" stroke="#141416" stroke-width="3.5"/>
+     <circle cx="56" cy="36" r="8" fill="#ffcc00" stroke="#141416" stroke-width="2"/>
+   </svg>
+ </div>
+ <div class="bg-gear-wrap">
+   <svg class="gear-watermark" viewBox="0 0 170 190" fill="none">
+     <circle cx="85" cy="95" r="72" stroke="#141416" stroke-width="3.5" stroke-dasharray="14 7" fill="#f8fafc"/>
+     <circle cx="85" cy="95" r="22" fill="#ffcc00" stroke="#141416" stroke-width="2.5"/>
+   </svg>
+ </div>
+ <h2>Lubricantes Mobil y Esso</h2>
+ <p class="lead">Línea completa de lubricantes marca <b>MOBIL</b> y <b>ESSO</b>.</p>
+ <div class="strip big" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px;position:relative;z-index:2">
+   <div class="slot" data-g="l" data-default="imagenes/fotos_seo/LUB-1.jpg"></div>
+   <div class="slot" data-g="l" data-default="imagenes/fotos_seo/LUB-2.jpg"></div>
+   <div class="slot" data-g="l" data-default="imagenes/fotos_seo/LUB-3.jpg"></div>
+   <div class="slot" data-g="l" data-default="imagenes/fotos_seo/LUB-4.jpg"></div>
+ </div>
+ <!-- <div class="lub-bar">
+   <div><b>Presentaciones de Alto Rendimiento:</b> <span>Tambores de 208 litros, baldes y bidones para faena y transporte de carga.</span></div>
+   <b style="color:var(--yellow)">Mobil & Esso</b>
+ </div> -->
+</section>
+
+<!-- ===================================================
+     DIAPOSITIVA 10: CONTACTO & CIERRE
+     =================================================== -->
+<section class="page dark contact-page">
+ <div class="brand-logo"><img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos"></div>
+ <div class="bg-wheel-wrap">
+   <svg class="tire-watermark" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="98" fill="none" stroke="#ffcc00" stroke-width="2"/>
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#2d2d32" stroke-width="15" stroke-dasharray="10 5"/>
+    <circle cx="100" cy="100" r="76" fill="#1f1f22"/>
+    <circle cx="100" cy="100" r="46" fill="#2c2818" stroke="#ffcc00" stroke-width="2"/>
+    <circle cx="100" cy="100" r="15" fill="#141416"/>
+    <g fill="#ffcc00"><circle cx="100" cy="74" r="5"/><circle cx="124.7" cy="92" r="5"/><circle cx="115.3" cy="121" r="5"/><circle cx="84.7" cy="121" r="5"/><circle cx="75.3" cy="92" r="5"/></g>
+   </svg>
+   <div class="ring"></div>
+ </div>
+
+ <div class="contact-header">
+   <span class="contact-pill">Evaluamos y entregamos en terreno · Respuesta inmediata</span>
+   <h2>Cotiza hoy mismo<br>
+   <!-- <span class="y">Entrega presencial ante urgencias</span> -->
+  </h2>
+   <p class="lead" style="max-width:180mm;font-size:14px;color:#ccc;margin-top:4px">Para la atención en las zonas antes mencionadas, pueden contactar a nuestro ejecutivo
+de ventas el <b>Sr. Sergio Enrique Olmedo:</b></p>
+ </div>
+
+ <div class="contact-grid">
+   <div class="contact-card highlight">
+     <div class="contact-card-badge">
+       <svg class="contact-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+       <span>Teléfono & WhatsApp directo</span>
+     </div>
+     <div class="contact-main-val y">+56 9 9255 0408</div>
+     <div class="contact-sub-val"><b>Sergio Enrique Olmedo</b> · Ejecutivo de ventas</div>
+   </div>
+
+   <div class="contact-card">
+     <div class="contact-card-badge">
+       <svg class="contact-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+       <span>Ventas & Cotizaciones</span>
+     </div>
+     <div class="contact-main-val">solmedo@seorepuestos.cl</div>
+     <div class="contact-sub-val">Envío rápido de cotizaciones</div>
+   </div>
+
+   <div class="contact-card">
+     <div class="contact-card-badge">
+       <svg class="contact-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+       <span>Página Web</span>
+     </div>
+     <div class="contact-main-val y">www.seorepuestos.cl</div>
+   </div>
+
+   <div class="contact-card">
+     <div class="contact-card-badge">
+       <svg class="contact-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+       <span>Casa Matriz & Empresa</span>
+     </div>
+     <div class="contact-main-val">Andrés Juliá 118, Coquimbo</div>
+     <div class="contact-sub-val"><b>SEO REPUESTOS SPA</b> · RUT: 76.598.289-8</div>
+   </div>
+ </div>
+
+ <div class="contact-zone">
+   <b>Zona de cobertura:</b>
+   <span>La Serena · Coquimbo · Vallenar · Freirina · Huasco · Vicuña · Ovalle y alrededores</span>
+ </div>
+
+ <div class="contact-photos">
+   <div class="contact-photo-card"><div class="slot" data-g="ct" data-default="imagenes/fotos_seo/25.jpeg"></div></div>
+   <div class="contact-photo-card"><div class="slot" data-g="ct" data-default="imagenes/fotos_seo/26.jpeg"></div></div>
+   <div class="contact-photo-card"><div class="slot" data-g="ct" data-default="imagenes/fotos_seo/27.jpeg"></div></div>
+ </div>
+</section>
+
+</main>
+
+<script>
+const stage = document.getElementById('stage');
+function fit(){
+  if(!document.body.classList.contains('pres-mode')){
+    stage.style.setProperty('--z', Math.min(1, (innerWidth - 24) / 1123));
+  }
+}
+addEventListener('resize', fit);
+fit();
+
+const toast = document.getElementById('toast');
+function showToast(msg, duration = 3500){
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(() => toast.style.display = 'none', duration);
+}
+
+// --- TOGGLE MODO DINÁMICO (ANIMACIONES) VS ESTÁTICO ---
+const toggleAnimBtn = document.getElementById('toggleAnim');
+let isStaticMode = false;
+toggleAnimBtn.onclick = () => {
+  isStaticMode = !isStaticMode;
+  document.body.classList.toggle('static-mode', isStaticMode);
+  toggleAnimBtn.textContent = isStaticMode ? 'Animaciones: OFF (Estático)' : 'Animaciones: ON';
+  showToast(isStaticMode ? 'Modo Estático activado (animaciones pausadas)' : 'Modo Dinámico activado (animaciones en ejecución)');
+};
+
+// --- MODO PRESENTACIÓN INTERACTIVO (Slide-by-Slide F5) ---
+const pages = [...document.querySelectorAll('.page')];
+let curSlide = 0;
+let isPresMode = false;
+const toggleBtn = document.getElementById('togglePres');
+const presNav = document.getElementById('presNav');
+const pCount = document.getElementById('pCount');
+
+function updateSlide(){
+  pages.forEach((p, idx) => {
+    p.classList.toggle('active-slide', idx === curSlide);
+  });
+  pCount.textContent = (curSlide + 1) + ' / ' + pages.length;
+}
+
+function enterPresMode(){
+  isPresMode = true;
+  document.body.classList.add('pres-mode');
+  curSlide = 0;
+  updateSlide();
+  toggleBtn.textContent = 'Salir Presentación (Esc)';
+  showToast('Modo Presentación activado. Usa flechas ◀ ▶ o espacio para avanzar.');
+}
+
+function exitPresMode(){
+  isPresMode = false;
+  document.body.classList.remove('pres-mode');
+  pages.forEach(p => p.classList.remove('active-slide'));
+  toggleBtn.textContent = 'Modo Presentación (F5)';
+  fit();
+}
+
+toggleBtn.onclick = () => isPresMode ? exitPresMode() : enterPresMode();
+document.getElementById('pExit').onclick = exitPresMode;
+document.getElementById('pNext').onclick = () => {
+  if(curSlide < pages.length - 1){ curSlide++; updateSlide(); }
+};
+document.getElementById('pPrev').onclick = () => {
+  if(curSlide > 0){ curSlide--; updateSlide(); }
+};
+
+window.addEventListener('keydown', (e) => {
+  if(e.key === 'F5'){ e.preventDefault(); isPresMode ? exitPresMode() : enterPresMode(); }
+  if(e.key === 'Escape' && isPresMode){ exitPresMode(); }
+  if(isPresMode){
+    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){
+      if(curSlide < pages.length - 1){ curSlide++; updateSlide(); }
+    }
+    if(e.key === 'ArrowLeft' || e.key === 'PageUp'){
+      if(curSlide > 0){ curSlide--; updateSlide(); }
+    }
+  }
+});
+
+// --- GESTIÓN DE BASE DE DATOS Y CONVERSIÓN DE IMÁGENES A BASE64 ---
+let db = null;
+const openDB = () => new Promise(r => {
+  try {
+    const q = indexedDB.open('seo-imgs3', 1);
+    q.onupgradeneeded = () => q.result.createObjectStore('i');
+    q.onsuccess = () => r(q.result);
+    q.onerror = () => r(null);
+  } catch(e) { r(null); }
+});
+
+const idb = (m, f) => new Promise(r => {
+  if(!db) return r();
+  try {
+    const t = db.transaction('i', m), q = f(t.objectStore('i'));
+    t.oncomplete = () => r(q && q.result);
+    t.onerror = () => r();
+  } catch(e) { r(); }
+});
+
+function blobToDataURL(blob){
+  return new Promise(res => {
+    const r = new FileReader();
+    r.onloadend = () => res(r.result);
+    r.onerror = () => res(null);
+    r.readAsDataURL(blob);
+  });
+}
+
+async function fetchImageAsBase64(url){
+  try {
+    const res = await fetch(url, {mode: 'cors'});
+    if(res.ok){
+      const b = await res.blob();
+      return await blobToDataURL(b);
+    }
+  } catch(e){}
+
+  const proxies = [
+    'https://api.allorigins.win/raw?url=',
+    'https://corsproxy.io/?'
+  ];
+  for(const p of proxies){
+    try {
+      const res = await fetch(p + encodeURIComponent(url));
+      if(res.ok){
+        const b = await res.blob();
+        return await blobToDataURL(b);
+      }
+    } catch(e){}
+  }
+  return null;
+}
+
+async function preloadDefaultImages(){
+  const items = [
+    {k: 'def_logo_b64', u: 'https://www.cargasespeciales.com/imagenes/logo_seo.jpg', sel: '.brand-logo img, .cv-logo-box img'},
+    {k: 'def_brands_b64', u: 'https://www.cargasespeciales.com/imagenes/logos_neumaticos.jpg', sel: '.brand-showcase-giant img'}
+  ];
+  for(const it of items){
+    let b64 = await idb('readonly', st => st.get(it.k));
+    if(!b64){
+      b64 = await fetchImageAsBase64(it.u);
+      if(b64) await idb('readwrite', st => st.put(b64, it.k));
+    }
+    if(b64){
+      document.querySelectorAll(it.sel).forEach(img => {
+        if(img.src !== b64) img.src = b64;
+      });
+    }
+  }
+}
+
+// Captura fiel mediante html2canvas con reemplazo de object-fit
+const shot = async (el) => {
+  return await html2canvas(el, {
+    scale: 3,
+    useCORS: true,
+    allowTaint: false,
+    logging: false,
+    imageTimeout: 15000,
+    scrollX: 0,
+    scrollY: 0,
+    x: 0,
+    y: 0,
+    width: el.offsetWidth,
+    height: el.offsetHeight,
+    onclone: (doc) => {
+      doc.querySelectorAll('img').forEach(img => {
+        const cs = doc.defaultView.getComputedStyle(img);
+        const fit = cs.objectFit;
+        if (!fit || fit === 'fill') return;
+        const d = doc.createElement('div');
+        d.style.cssText = 'display:block;width:' + (cs.width || '100%') + ';height:' + (cs.height || '100%') + ';' +
+          'background-image:url("' + (img.currentSrc || img.src) + '");background-repeat:no-repeat;' +
+          'background-size:' + (fit === 'cover' ? 'cover' : fit === 'contain' ? 'contain' : 'auto') + ';' +
+          'background-position:' + (cs.objectPosition || '50% 50%') + ';';
+        img.parentNode.replaceChild(d, img);
+      });
+    },
+    backgroundColor: el.classList.contains('dark') ? '#141416' : '#ffffff'
+  });
+};
+
+const btn = document.getElementById('pdf'), btnP = document.getElementById('pptx');
+
+async function saveFile(name, blob){
+  let dl = null;
+  try { dl = window.claude ? await window.claude.use('downloads') : null; } catch(e){}
+  if(dl){
+    await dl.save({filename: name, data: blob});
+  } else {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+}
+
+async function run(b, label, fn){
+  const t = b.textContent;
+  btn.disabled = btnP.disabled = true;
+  b.textContent = label;
+  const wasPres = isPresMode;
+  if(wasPres) exitPresMode();
+  document.body.classList.add('exporting', 'static-mode');
+  stage.style.zoom = 1;
+  window.scrollTo(0, 0);
+  try {
+    if(document.fonts && document.fonts.ready) await document.fonts.ready;
+    await preloadDefaultImages();
+    await fn();
+  } catch(e) {
+    if(!(e && e.code === 'declined')){
+      console.error(e);
+      showToast('No se pudo exportar: ' + ((e && e.message) || e));
+    }
+  } finally {
+    document.body.classList.remove('exporting');
+    if(!isStaticMode) document.body.classList.remove('static-mode');
+    stage.style.zoom = '';
+    fit();
+    if(wasPres) enterPresMode();
+    btn.disabled = btnP.disabled = false;
+    b.textContent = t;
+  }
+}
+
+// --- EXPORTAR A PDF (297x210 mm exactas) ---
+btn.onclick = () => run(btn, 'Generando PDF…', async () => {
+  const allPages = [...document.querySelectorAll('.page')];
+  const jsPDF = window.jspdf && window.jspdf.jsPDF;
+  if(!jsPDF) throw new Error('No cargó la librería jsPDF');
+  const pdf = new jsPDF({orientation: 'landscape', unit: 'mm', format: [297, 210], compress: true});
+
+  for(let i = 0; i < allPages.length; i++){
+    const c = await shot(allPages[i]);
+    const imgData = c.toDataURL('image/jpeg', 0.98);
+    if(i > 0) pdf.addPage([297, 210], 'landscape');
+    pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210, undefined, 'FAST');
+  }
+  await saveFile('SEO-Repuestos-Brochure.pdf', pdf.output('blob'));
+});
+
+// --- EXPORTAR A PPTX (Captura 1:1 original fiel) ---
+btnP.onclick = () => run(btnP, 'Generando PPTX…', async () => {
+  const allPages = [...document.querySelectorAll('.page')];
+  if(typeof PptxGenJS === 'undefined') throw new Error('No cargó PptxGenJS');
+  const px = new PptxGenJS();
+  px.defineLayout({name: 'A4L', width: 11.693, height: 8.268});
+  px.layout = 'A4L';
+  px.title = 'SEO Repuestos SpA · Presentación';
+
+  for(const p of allPages){
+    const c = await shot(p);
+    px.addSlide().addImage({
+      data: c.toDataURL('image/jpeg', 0.98),
+      x: 0,
+      y: 0,
+      w: 11.693,
+      h: 8.268
+    });
+  }
+  await saveFile('SEO-Repuestos-Brochure.pptx', await px.write({outputType: 'blob'}));
+});
+
+// ---- GESTIÓN DE ESPACIOS FOTOGRÁFICOS ----
+const slots = [...document.querySelectorAll('.slot')];
+const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.hidden = true; document.body.appendChild(inp);
+let target = null;
+
+const shrink = f => new Promise((res, rej) => {
+  const u = URL.createObjectURL(f), im = new Image();
+  im.onload = () => {
+    const s = Math.min(1, 2000 / Math.max(im.width, im.height)), c = document.createElement('canvas');
+    c.width = im.width * s; c.height = im.height * s;
+    c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+    URL.revokeObjectURL(u);
+    res(c.toDataURL('image/jpeg', .95));
+  };
+  im.onerror = rej; im.src = u;
+});
+
+const paint = (s, u) => { s.style.backgroundImage = u ? 'url("' + u + '")' : ''; s.classList.toggle('full', !!u); };
+async function setImg(s, f){
+  if(!f || !f.type.startsWith('image/')) return;
+  try {
+    const u = await shrink(f);
+    paint(s, u);
+    idb('readwrite', st => st.put(u, s.dataset.k));
+  } catch(e){}
+}
+
+const cnt = {};
+slots.forEach(s => {
+  const g = s.dataset.g;
+  cnt[g] = (cnt[g] || 0) + 1;
+  const n = cnt[g];
+  s.dataset.k = g + n;
+
+  let lab = '';
+  if(g === 't') lab = 'Foto ' + n;
+  else if(g === 'cov') lab = 'Portada ' + n;
+  else if(g === 'ct') lab = 'Cierre ' + n;
+  else if(g === 'l') lab = 'Lubricante ' + n;
+  else if(g === 'flt') lab = 'Filtro ' + n;
+  else if(g === 'frn') lab = 'Frenos ' + n;
+  else lab = 'Espacio ' + n;
+
+  s.innerHTML = '<div class="n">' + lab + '<small>clic o arrastra</small></div><button class="x" aria-label="Quitar">×</button>';
+  s.tabIndex = 0; s.setAttribute('role', 'button'); s.setAttribute('aria-label', lab);
+  s.onclick = e => {
+    if(e.target.classList.contains('x')){
+      e.stopPropagation();
+      paint(s, '');
+      idb('readwrite', st => st.delete(s.dataset.k));
+      return;
+    }
+    target = s; inp.click();
+  };
+  s.onkeydown = e => {
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); target = s; inp.click(); }
+  };
+  s.ondragover = e => { e.preventDefault(); s.classList.add('over'); };
+  s.ondragleave = () => s.classList.remove('over');
+  s.ondrop = e => { e.preventDefault(); s.classList.remove('over'); setImg(s, e.dataTransfer.files[0]); };
+});
+
+inp.onchange = () => { setImg(target, inp.files[0]); inp.value = ''; };
+
+// Inicialización de imágenes
+(async () => {
+  db = await openDB();
+  await preloadDefaultImages();
+  for(const s of slots){
+    const v = await idb('readonly', st => st.get(s.dataset.k));
+    if(s.dataset.default) paint(s, s.dataset.default);
+    else if(v) paint(s, v);
+  }
+})();
+</script>
+</body>
+</html>
