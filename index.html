@@ -3,15 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0e11">
 <title>SEO Repuestos SpA · Presentación Corporativa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,700;0,800;0,900;1,900&display=swap" rel="stylesheet">
-<!-- Librerías estables de exportación -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
 <style>
-:root{
+:root{  
   --black:#141416;
   --yellow:#ffcc00;
   --yellow-glow:rgba(255,204,0,.25);
@@ -28,19 +25,6 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bgpage);font-family:var(--b);color:var(--black);overflow-x:hidden}
-
-/* Barra superior fija con controladores limpios */
-.bar{position:sticky;top:0;z-index:999;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(20,20,22,.96);backdrop-filter:blur(8px);border-bottom:1px solid #2d2e33;color:#fff}
-.bar b{font:900 1.02rem var(--h);color:var(--yellow);letter-spacing:.02em}
-.bar small{display:block;color:#9ca3af;font-size:.75rem}
-.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.btn{font:800 .85rem var(--b);padding:.65em 1.15em;border-radius:6px;border:0;cursor:pointer;background:var(--yellow);color:#141416;transition:all .2s ease;box-shadow:0 2px 8px rgba(255,204,0,.25);display:inline-flex;align-items:center;gap:6px}
-.btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(255,204,0,.45)}
-.btn.alt{background:#232326;color:#e5e7eb;border:1px solid #3f3f46;box-shadow:none}
-.btn.alt:hover{background:#2d2d2d;color:#fff;border-color:var(--yellow)}
-.btn.accent{background:transparent;color:var(--yellow);border:1.5px solid var(--yellow)}
-.btn.accent:hover{background:var(--yellow);color:var(--black)}
-.btn:disabled{opacity:.5;cursor:wait;transform:none}
 
 /* Escenario y páginas A4 apaisadas (297x210 mm) con balance vertical optimizado. */
 .stage{padding:24px 0;zoom:var(--z,1);transition:transform .3s ease}
@@ -87,32 +71,6 @@ h3{font-weight:800;font-size:16px;line-height:1.2;position:relative;z-index:2}
 .bg-gear-wrap{position:absolute;right:8mm;bottom:8mm;width:42mm;height:50mm;pointer-events:none;z-index:1;opacity:.18}
 .bg-gear-wrap svg{width:100%;height:100%;display:block}
 
-/* Animaciones suaves en Web */
-@keyframes spinWheel{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-@keyframes drumFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-3px)}
-}
-@keyframes gearPulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.02)}
-}
-body:not(.static-mode):not(.exporting) .tire-watermark{
-  animation:spinWheel 90s linear infinite;
-}
-body:not(.static-mode):not(.exporting) .cv-dec-wheel{
-  animation:spinWheel 140s linear infinite;
-}
-body:not(.static-mode):not(.exporting) .drum-watermark{
-  animation:drumFloat 6s ease-in-out infinite;
-}
-body:not(.static-mode):not(.exporting) .gear-watermark{
-  animation:gearPulse 8s ease-in-out infinite;
-}
-
 /* Portada */
 .cv-logo{position:absolute;top:10mm;left:0;right:0;display:flex;justify-content:center;align-items:center;z-index:3}
 .cv-logo-box{width:160mm;height:44mm;overflow:hidden;background-color:var(--black);display:flex;align-items:center;justify-content:center}
@@ -154,15 +112,6 @@ body:not(.static-mode):not(.exporting) .gear-watermark{
 .tire-grid-4x2 .slot{height:65mm;background-size:cover;background-position:center;border-radius:6px;border:2px solid var(--black);box-shadow:5px 5px 0 var(--yellow);cursor:pointer;position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
 .tire-grid-4x2 .slot:hover{transform:translateY(-2px);box-shadow:6px 6px 0 var(--black)}
 .tire-grid-4x2 .slot .n,.tire-grid-4x2 .slot .x{display:none!important}
-
-/* Slots interactivos generales */
-.slot{position:relative;background:#232326 repeating-linear-gradient(45deg,transparent 0 12px,rgba(255,204,0,.08) 12px 24px) center/cover no-repeat;cursor:pointer;min-height:0;overflow:visible}
-.slot .n{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--yellow);font:800 12px var(--h);text-align:center;gap:4px;padding:8px}
-.slot .n small{font:500 10px var(--b);color:#9ca3af}
-.slot.full .n{display:none}
-.slot .x{position:absolute;right:4px;top:4px;width:22px;height:22px;border:0;border-radius:50%;background:#000c;color:#fff;cursor:pointer;display:none;font-size:14px;line-height:1;z-index:5}
-.slot.full:hover .x{display:block}
-.slot.over{outline:3px dashed var(--yellow)}
 
 /* ===================================================
    DIAPOSITIVA 7: CATÁLOGO DESTACADO (Más grande y legible)
@@ -223,81 +172,109 @@ body:not(.static-mode):not(.exporting) .gear-watermark{
 .contact-photo-card{position:relative;background:#1f2024;border:2px solid #38383c;border-radius:6px;box-shadow:4px 4px 0 var(--yellow);overflow:hidden;min-width:0}
 .contact-photo-card .slot{height:40mm;box-shadow:none;border-radius:0}
 
-/* ===================================================
-   MODO PRESENTACIÓN PANTALLA COMPLETA
-   =================================================== */
-body.pres-mode{background:#000;overflow:hidden}
-body.pres-mode .bar{position:fixed;top:0;left:0;right:0;background:rgba(10,10,12,.92);z-index:9999}
-body.pres-mode .stage{padding:0;height:100vh;display:flex;align-items:center;justify-content:center}
-body.pres-mode .page{margin:0;display:none}
-body.pres-mode .page.active-slide{display:flex}
-.pres-nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:99999;display:none;gap:12px;background:#18181b;padding:8px 16px;border-radius:30px;border:1.5px solid var(--yellow);box-shadow:0 8px 24px rgba(0,0,0,.7)}
-body.pres-mode .pres-nav{display:flex}
-.pres-nav button{background:transparent;border:0;color:var(--yellow);font:900 15px var(--h);cursor:pointer;padding:4px 12px;border-radius:14px}
-.pres-nav button:hover{background:var(--yellow);color:#000}
-.pres-nav span{color:#fff;font:700 13px/28px var(--h);padding:0 6px}
 
-/* ===================================================
-   MODO ESTÁTICO Y REGLAS DE EXPORTACIÓN
-   =================================================== */
-body.static-mode *,body.static-mode *::before,body.static-mode *::after{
-  animation:none!important;transition:none!important;
+/* ============ BASE DEL VISOR ============ */
+html,body{height:100%}
+body{overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#17181d 0%,#0d0e11 70%);-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.deck{position:fixed;inset:0;overflow:hidden;opacity:0;transition:opacity .6s ease}
+body.ready .deck{opacity:1}
+.scaler{position:absolute;left:50%;top:50%;width:297mm;height:210mm;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:50% 50%}
+.deck .page{position:absolute;left:0;top:0;margin:0;opacity:0;visibility:hidden;box-shadow:0 18px 60px rgba(0,0,0,.65);
+  transition:opacity .7s ease,transform .85s cubic-bezier(.65,0,.25,1),visibility 0s linear .85s;will-change:transform,opacity}
+.deck .page.is-before{transform:translateX(-7%)}
+.deck .page.is-after{transform:translateX(7%)}
+.deck .page.is-active{opacity:1;visibility:visible;transform:none;z-index:2;transition-delay:0s}
+.deck .slot{cursor:default!important;background-size:cover;background-position:center}
+.deck .tire-grid-4x2 .slot:hover{transform:none;box-shadow:5px 5px 0 var(--yellow)}
+
+/* Cargador */
+.loader{position:fixed;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;border:6px solid #2a2b30;border-top-color:var(--yellow);animation:spinWheel .9s linear infinite;transition:opacity .4s;z-index:50}
+body.ready .loader{opacity:0;pointer-events:none}
+
+/* Rueda de portada */
+.cv-wheel{position:absolute;left:50%;top:-35mm;width:240mm;height:240mm;margin-left:-120mm;pointer-events:none}
+.cv-wheel svg{width:100%;height:100%;opacity:.14;transform-origin:50% 50%;display:block}
+
+/* ============ MOVIMIENTO AMBIENTAL (suave, continuo) ============ */
+@keyframes spinWheel{to{transform:rotate(360deg)}}
+@keyframes drumFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes gearPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+@media (prefers-reduced-motion:no-preference){
+  .tire-watermark{animation:spinWheel 120s linear infinite}
+  .cv-wheel svg{animation:spinWheel 160s linear infinite}
+  .drum-watermark{animation:drumFloat 7s ease-in-out infinite}
+  .gear-watermark{animation:gearPulse 9s ease-in-out infinite}
+  .page:not(.is-active) :is(.tire-watermark,.cv-wheel svg,.drum-watermark,.gear-watermark){animation-play-state:paused}
 }
 
-@media print{
-  @page{size:297mm 210mm;margin:0}
-  html,body{background:#fff!important;margin:0!important;padding:0!important}
-  .bar,.pres-nav{display:none!important}
-  .stage{zoom:1!important;padding:0!important;margin:0!important}
-  .page{margin:0!important;box-shadow:none!important;border-radius:0!important;page-break-after:always;break-after:page}
-  *{animation:none!important;transition:none!important;transform:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .slot .n,.slot .x{display:none!important}
+/* ============ ANIMACIONES DE ENTRADA (solo la 1.ª vez que se ve cada diapositiva) ============ */
+@keyframes aUp{from{opacity:0;transform:translateY(30px)}}
+@keyframes aDown{from{opacity:0;transform:translateY(-38px)}}
+@keyframes aLeft{from{opacity:0;transform:translateX(-72px)}}
+@keyframes aRight{from{opacity:0;transform:translateX(72px)}}
+@keyframes aZoom{from{opacity:0;transform:scale(.86)}}
+@keyframes aPop{from{opacity:0;transform:translateY(34px) scale(.9)}}
+@keyframes aRow{from{opacity:0;transform:translateX(-26px)}}
+@keyframes aSkew{from{opacity:0;transform:translateY(64px) skewX(-7deg)}}
+@keyframes aFade{from{opacity:0}}
+@keyframes aWipe{from{clip-path:inset(-24px 100% -24px -24px)}to{clip-path:inset(-24px -24px -24px -24px)}}
+@keyframes aWheel{from{opacity:0;transform:rotate(-260deg) scale(.55)}}
+@keyframes aLine{from{transform:scaleX(0)}}
+@keyframes aStripe{from{transform:scaleX(0)}}
+
+@media (prefers-reduced-motion:no-preference){
+  [data-an=up]{--an:aUp}[data-an=down]{--an:aDown}[data-an=left]{--an:aLeft}[data-an=right]{--an:aRight}
+  [data-an=zoom]{--an:aZoom}[data-an=pop]{--an:aPop}[data-an=row]{--an:aRow}[data-an=skew]{--an:aSkew}
+  [data-an=fade]{--an:aFade}[data-an=wipe]{--an:aWipe}[data-an=wheel]{--an:aWheel}
+  .page:not(.played) .a{opacity:0}
+  .page.played .a{animation:var(--an) var(--dur,.8s) var(--ease,cubic-bezier(.2,.7,.2,1)) var(--d,0s) backwards}
+  .page h2::after{transform-origin:left center}
+  .page:not(.played) h2::after{opacity:0}
+  .page.played h2::after{animation:aLine .8s cubic-bezier(.2,.7,.2,1) .95s backwards}
+  .page::after{transform-origin:left center}
+  .page.played::after{animation:aStripe 1.1s cubic-bezier(.2,.7,.2,1) .15s backwards}
+  .page.played:not(.cover)::before{animation:aFade 1s 1.1s backwards}
 }
 
-body.exporting{background:#fff!important;margin:0!important;padding:0!important}
-body.exporting .bar,body.exporting .pres-nav{display:none!important}
-body.exporting .stage{zoom:1!important;padding:0!important;margin:0!important}
-body.exporting .page{margin:0!important;box-shadow:none!important;border-radius:0!important;width:297mm!important;height:210mm!important}
-body.exporting *,body.exporting *::before,body.exporting *::after{animation:none!important;transition:none!important}
-body.exporting .slot .n,body.exporting .slot .x{display:none!important}
-
-/* Notificación flotante */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141416;color:var(--yellow);border:2px solid var(--yellow);padding:10px 24px;border-radius:8px;font:800 13px var(--h);box-shadow:0 8px 30px rgba(0,0,0,.8);z-index:99999;display:none}
+/* ============ CONTROLES DE NAVEGACIÓN ============ */
+.progress{position:fixed;left:0;right:0;top:0;height:3px;background:rgba(255,255,255,.06);z-index:60}
+.progress i{display:block;height:100%;width:0;background:var(--yellow);box-shadow:0 0 10px var(--yellow-glow);transition:width .6s cubic-bezier(.65,0,.25,1)}
+.edge{position:fixed;top:0;bottom:0;width:11%;min-width:56px;z-index:40;border:0;background:transparent;color:var(--yellow);display:flex;align-items:center;cursor:pointer;opacity:0;transition:opacity .3s;padding:0 14px}
+.edge.prev{left:0;justify-content:flex-start;background:linear-gradient(90deg,rgba(0,0,0,.35),transparent)}
+.edge.next{right:0;justify-content:flex-end;background:linear-gradient(270deg,rgba(0,0,0,.35),transparent)}
+.edge svg{width:38px;height:38px;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
+.edge:hover{opacity:1}
+.edge[disabled]{display:none}
+body.ui .edge{opacity:.55}
+body.ui .edge:hover{opacity:1}
+.dock{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:10px;background:rgba(24,24,27,.92);backdrop-filter:blur(8px);padding:7px 12px;border-radius:30px;border:1.5px solid var(--yellow);box-shadow:0 8px 24px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .35s,transform .35s}
+body.ui .dock{opacity:1;pointer-events:auto}
+.dock button{background:transparent;border:0;color:var(--yellow);width:30px;height:30px;border-radius:50%;cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.dock button:hover{background:var(--yellow);color:#000}
+.dock button:disabled{opacity:.3;pointer-events:none}
+.dock svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.dots{display:flex;gap:7px;align-items:center}
+.dots button{width:10px;height:10px;padding:0;border-radius:50%;background:#4b4c52}
+.dots button:hover{background:#9ca3af;color:inherit}
+.dots button.on{background:var(--yellow);width:22px;border-radius:6px}
+#count{color:#fff;font:700 12px var(--h);min-width:42px;text-align:center}
+.hint{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:70;background:var(--yellow);color:#141416;font:800 12px var(--h);padding:8px 16px;border-radius:20px;box-shadow:0 6px 20px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .4s}
+.hint.show{opacity:1}
+@media (hover:none){.edge{display:none}}
 </style>
 </head>
 <body>
-<div class="toast" id="toast"></div>
+<div class="loader" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
 
-<!-- Barra de herramientas limpia -->
-<div class="bar">
- <div>
-   <b>SEO REPUESTOS · Brochure Corporativo</b>
-   <small>A4 Apaisado · 10 Hojas · Optimizado para flotas, minería y transporte</small>
- </div>
- <div class="tools">
-  <button class="btn accent" id="togglePres">Modo Presentación (F5)</button>
-  <button class="btn alt" id="toggleAnim">Animaciones: ON</button>
-  <button class="btn" id="pdf">Exportar a PDF</button>
-  <button class="btn alt" id="pptx">Exportar a PPTX</button>
-  <button class="btn alt" onclick="window.print()">Imprimir</button>
- </div>
-</div>
-
-<!-- Controles del Modo Presentación en pantalla -->
-<div class="pres-nav" id="presNav">
-  <button id="pPrev">◀ Anterior</button>
-  <span id="pCount">1 / 10</span>
-  <button id="pNext">Siguiente ▶</button>
-  <button id="pExit" style="color:#ef4444">Salir ✕</button>
-</div>
-
-<main class="stage" id="stage">
+<main class="deck" id="deck" aria-label="Presentación corporativa SEO Repuestos">
+<div class="scaler" id="scaler">
 
 <!-- ===================================================
      DIAPOSITIVA 1: PORTADA
      =================================================== -->
 <section class="page dark cover">
- <svg class="dec cv-dec-wheel" viewBox="0 0 200 200" style="left:50%;top:-35mm;width:240mm;height:240mm;margin-left:-120mm;opacity:.14;position:absolute;pointer-events:none;transform-origin:50% 50%">
+ <div class="cv-wheel"><svg class="cv-dec-wheel" viewBox="0 0 200 200">
   <circle cx="100" cy="100" r="98" fill="#0d0d0d" stroke="#ffcc00" stroke-width="2"/>
   <circle cx="100" cy="100" r="88" fill="none" stroke="#2d2d2d" stroke-width="16" stroke-dasharray="9 6"/>
   <circle cx="100" cy="100" r="70" fill="#1f1f1f"/>
@@ -305,7 +282,7 @@ body.exporting .slot .n,body.exporting .slot .x{display:none!important}
   <circle cx="100" cy="100" r="39" fill="none" stroke="#1a1a1a" stroke-width="3"/>
   <circle cx="100" cy="100" r="13" fill="#1a1a1a"/>
   <g fill="#1a1a1a"><circle cx="124" cy="100" r="4"/><circle cx="107.4" cy="122.8" r="4"/><circle cx="80.6" cy="114.1" r="4"/><circle cx="80.6" cy="85.9" r="4"/><circle cx="107.4" cy="77.2" r="4"/></g>
- </svg>
+ </svg></div>
  <div class="cv-logo">
    <div class="cv-logo-box">
      <img src="https://www.cargasespeciales.com/imagenes/logo_seo.jpg" alt="SEO Repuestos">
@@ -314,10 +291,10 @@ body.exporting .slot .n,body.exporting .slot .x{display:none!important}
  <div class="cv-mid"><div class="plus">+10</div><h1>Años de<br><span class="y">experiencia</span></h1></div>
  <div class="cv-sub"><b>Respuesta rápida y oportuna a tus requerimientos</b><span>Las mejores marcas, en stock</span></div>
  <div class="cv-row">
-   <div class="slot" data-g="cov" data-default="imagenes/fotos_seo/1.jpg"></div>
-   <div class="slot" data-g="cov" data-default="imagenes/fotos_seo/2.jpg"></div>
-   <div class="slot" data-g="cov" data-default="imagenes/fotos_seo/3.jpg"></div>
-   <div class="slot" data-g="cov" data-default="imagenes/fotos_seo/4.jpg"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/1.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/2.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/3.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/4.jpg')"></div>
  </div>
 </section>
 
@@ -478,14 +455,14 @@ body.exporting .slot .n,body.exporting .slot .x{display:none!important}
  </div>
  <h2>Neumáticos para cada vehículo</h2>
  <div class="tire-grid-4x2">
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/1.jpg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/2.jpg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/3.jpg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/4.jpg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/5.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/6.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/7.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/8.jpeg"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/1.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/2.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/3.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/4.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/5.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/6.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/7.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/8.jpeg')"></div>
  </div>
 </section>
 
@@ -520,14 +497,14 @@ body.exporting .slot .n,body.exporting .slot .x{display:none!important}
  </div>
  <h2>Amplio stock de neumáticos</h2>
  <div class="tire-grid-4x2">
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/9.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/10.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/11.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/12.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/13.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/14.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/15.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/16.jpeg"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/25.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/26.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/27.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/12.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/13.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/14.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/15.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/16.jpeg')"></div>
  </div>
 </section>
 
@@ -562,14 +539,14 @@ body.exporting .slot .n,body.exporting .slot .x{display:none!important}
  </div>
  <h2>Modelos y medidas en stock</h2>
  <div class="tire-grid-4x2">
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/17.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/18.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/19.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/20.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/21.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/22.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/23.jpeg"></div>
-   <div class="slot" data-g="t" data-default="imagenes/fotos_seo/24.jpeg"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/17.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/18.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/19.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/20.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/21.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/22.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/23.jpeg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/24.jpeg')"></div>
  </div>
 </section>
 
@@ -658,7 +635,7 @@ body.exporting .slot .n,body.exporting .slot .x{display:none!important}
  </div> 
  <h2>Repuestos, filtros y frenos</h2>
  <!-- Nombramiento de repuestos Mercedes Benz, Volvo y Scania en la descripción de componentes -->
- <p class="lead" style="max-width:178mm;font-size:14.5px;color:#374151;margin-top:-4px">Contamos con repuestos para marcas como <b>MERCEDES BENZ</b>, <b>VOLVO</b> Y <b>SCANIA</b>, filtros para todo tipo de vehículos en las marcas <b>TECFIL</b> – <b>FLEETGUARD</b> entre otras. Disponemos también detoda la línea de pastillas y balatas marca <b>FRASLE</b> y <b>COBREQ</b> (Brasil).</p>
+ <p class="lead" style="max-width:178mm;font-size:14.5px;color:#374151;margin-top:-4px">Contamos con repuestos para marcas como <b>MERCEDES BENZ</b>, <b>VOLVO</b> Y <b>SCANIA</b>, filtros para todo tipo de vehículos en las marcas <b>TECFIL</b> – <b>FLEETGUARD</b> entre otras. Disponemos también de toda la línea de pastillas y balatas marca <b>FRASLE</b> y <b>COBREQ</b> (Brasil).</p>
 
  <div class="rf-2grid">
    <!-- Cuadro 1: SEGURIDAD (Filtros para todo tipo de vehículos) -->
@@ -674,8 +651,8 @@ body.exporting .slot .n,body.exporting .slot .x{display:none!important}
        </div>
      </div>
      <div class="rf-slots-big">
-       <div class="slot" data-g="flt" data-default="imagenes/fotos_seo/filtro_tecfil.jpg"></div>
-       <div class="slot" data-g="flt" data-default="imagenes/fotos_seo/filtro_fleetguard.jpg"></div>
+       <div class="slot" style="background-image:url('imagenes/fotos_seo/filtro_tecfil.jpg')"></div>
+       <div class="slot" style="background-image:url('imagenes/fotos_seo/filtro_fleetguard.jpg')"></div>
      </div>
    </div>
 
@@ -691,15 +668,15 @@ body.exporting .slot .n,body.exporting .slot .x{display:none!important}
        </div>
      </div>
      <div class="rf-slots-big">
-       <div class="slot" data-g="frn" data-default="imagenes/fotos_seo/balata_frasle.jpg"></div>
-       <div class="slot" data-g="frn" data-default="imagenes/fotos_seo/balata_cobreq.jpg"></div>
+       <div class="slot" style="background-image:url('imagenes/fotos_seo/balata_frasle.jpg')"></div>
+       <div class="slot" style="background-image:url('imagenes/fotos_seo/balata_cobreq.jpg')"></div>
      </div>
    </div>
  </div>
 
  <div class="rf-zone">
    <div><b>Disponible inmediata y entrega en terreno:</b> </div>
-   <div style="font:800 12px var(--h);color:var(--black);text-transform:uppercase;letter-spacing:.04em">Cuarta y Tercero Región</div>
+   <div style="font:800 12px var(--h);color:var(--black);text-transform:uppercase;letter-spacing:.04em">Cuarta y Tercera Región</div>
  </div>
 </section>
 
@@ -735,10 +712,10 @@ body.exporting .slot .n,body.exporting .slot .x{display:none!important}
  <h2>Lubricantes Mobil y Esso</h2>
  <p class="lead">Línea completa de lubricantes marca <b>MOBIL</b> y <b>ESSO</b>.</p>
  <div class="strip big" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px;position:relative;z-index:2">
-   <div class="slot" data-g="l" data-default="imagenes/fotos_seo/LUB-1.jpg"></div>
-   <div class="slot" data-g="l" data-default="imagenes/fotos_seo/LUB-2.jpg"></div>
-   <div class="slot" data-g="l" data-default="imagenes/fotos_seo/LUB-3.jpg"></div>
-   <div class="slot" data-g="l" data-default="imagenes/fotos_seo/LUB-4.jpg"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/LUB-1.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/LUB-2.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/LUB-3.jpg')"></div>
+   <div class="slot" style="background-image:url('imagenes/fotos_seo/LUB-4.jpg')"></div>
  </div>
  <!-- <div class="lub-bar">
    <div><b>Presentaciones de Alto Rendimiento:</b> <span>Tambores de 208 litros, baldes y bidones para faena y transporte de carga.</span></div>
@@ -815,355 +792,257 @@ de ventas el <b>Sr. Sergio Enrique Olmedo:</b></p>
  </div>
 
  <div class="contact-photos">
-   <div class="contact-photo-card"><div class="slot" data-g="ct" data-default="imagenes/fotos_seo/25.jpeg"></div></div>
-   <div class="contact-photo-card"><div class="slot" data-g="ct" data-default="imagenes/fotos_seo/26.jpeg"></div></div>
-   <div class="contact-photo-card"><div class="slot" data-g="ct" data-default="imagenes/fotos_seo/27.jpeg"></div></div>
+   <div class="contact-photo-card"><div class="slot" style="background-image:url('imagenes/fotos_seo/28.jpg')"></div></div>
+   <div class="contact-photo-card"><div class="slot" style="background-image:url('imagenes/fotos_seo/29.jpg')"></div></div>
+   <div class="contact-photo-card"><div class="slot" style="background-image:url('imagenes/fotos_seo/30.jpg')"></div></div>
  </div>
 </section>
 
+</div>
 </main>
 
+<button class="edge prev" id="edgePrev" aria-label="Diapositiva anterior"><svg viewBox="0 0 24 24"><polyline points="15 4 7 12 15 20"/></svg></button>
+<button class="edge next" id="edgeNext" aria-label="Diapositiva siguiente"><svg viewBox="0 0 24 24"><polyline points="9 4 17 12 9 20"/></svg></button>
+
+<nav class="dock" id="dock" aria-label="Navegación de la presentación">
+  <button id="prev" aria-label="Anterior"><svg viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></svg></button>
+  <span id="count">1 / 10</span>
+  <div class="dots" id="dots"></div>
+  <button id="next" aria-label="Siguiente"><svg viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></svg></button>
+  <button id="fs" aria-label="Pantalla completa" title="Pantalla completa (F)"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+<div class="hint" id="hint">Gira tu dispositivo para verla mejor</div>
+
 <script>
-const stage = document.getElementById('stage');
-function fit(){
-  if(!document.body.classList.contains('pres-mode')){
-    stage.style.setProperty('--z', Math.min(1, (innerWidth - 24) / 1123));
+(() => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const scaler = document.getElementById('scaler');
+  const pages  = [...scaler.querySelectorAll('.page')];
+  const N = pages.length;
+
+  /* ---------- Escalado: la diapositiva (297x210 mm) siempre cabe completa ---------- */
+  const W = 297 / 25.4 * 96, H = 210 / 25.4 * 96;
+  function fit(){
+    const s = Math.min(innerWidth / W, innerHeight / H);
+    scaler.style.setProperty('--s', s);
   }
-}
-addEventListener('resize', fit);
-fit();
+  addEventListener('resize', fit); fit();
 
-const toast = document.getElementById('toast');
-function showToast(msg, duration = 3500){
-  toast.textContent = msg;
-  toast.style.display = 'block';
-  setTimeout(() => toast.style.display = 'none', duration);
-}
-
-// --- TOGGLE MODO DINÁMICO (ANIMACIONES) VS ESTÁTICO ---
-const toggleAnimBtn = document.getElementById('toggleAnim');
-let isStaticMode = false;
-toggleAnimBtn.onclick = () => {
-  isStaticMode = !isStaticMode;
-  document.body.classList.toggle('static-mode', isStaticMode);
-  toggleAnimBtn.textContent = isStaticMode ? 'Animaciones: OFF (Estático)' : 'Animaciones: ON';
-  showToast(isStaticMode ? 'Modo Estático activado (animaciones pausadas)' : 'Modo Dinámico activado (animaciones en ejecución)');
-};
-
-// --- MODO PRESENTACIÓN INTERACTIVO (Slide-by-Slide F5) ---
-const pages = [...document.querySelectorAll('.page')];
-let curSlide = 0;
-let isPresMode = false;
-const toggleBtn = document.getElementById('togglePres');
-const presNav = document.getElementById('presNav');
-const pCount = document.getElementById('pCount');
-
-function updateSlide(){
-  pages.forEach((p, idx) => {
-    p.classList.toggle('active-slide', idx === curSlide);
-  });
-  pCount.textContent = (curSlide + 1) + ' / ' + pages.length;
-}
-
-function enterPresMode(){
-  isPresMode = true;
-  document.body.classList.add('pres-mode');
-  curSlide = 0;
-  updateSlide();
-  toggleBtn.textContent = 'Salir Presentación (Esc)';
-  showToast('Modo Presentación activado. Usa flechas ◀ ▶ o espacio para avanzar.');
-}
-
-function exitPresMode(){
-  isPresMode = false;
-  document.body.classList.remove('pres-mode');
-  pages.forEach(p => p.classList.remove('active-slide'));
-  toggleBtn.textContent = 'Modo Presentación (F5)';
-  fit();
-}
-
-toggleBtn.onclick = () => isPresMode ? exitPresMode() : enterPresMode();
-document.getElementById('pExit').onclick = exitPresMode;
-document.getElementById('pNext').onclick = () => {
-  if(curSlide < pages.length - 1){ curSlide++; updateSlide(); }
-};
-document.getElementById('pPrev').onclick = () => {
-  if(curSlide > 0){ curSlide--; updateSlide(); }
-};
-
-window.addEventListener('keydown', (e) => {
-  if(e.key === 'F5'){ e.preventDefault(); isPresMode ? exitPresMode() : enterPresMode(); }
-  if(e.key === 'Escape' && isPresMode){ exitPresMode(); }
-  if(isPresMode){
-    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){
-      if(curSlide < pages.length - 1){ curSlide++; updateSlide(); }
-    }
-    if(e.key === 'ArrowLeft' || e.key === 'PageUp'){
-      if(curSlide > 0){ curSlide--; updateSlide(); }
-    }
-  }
-});
-
-// --- GESTIÓN DE BASE DE DATOS Y CONVERSIÓN DE IMÁGENES A BASE64 ---
-let db = null;
-const openDB = () => new Promise(r => {
-  try {
-    const q = indexedDB.open('seo-imgs3', 1);
-    q.onupgradeneeded = () => q.result.createObjectStore('i');
-    q.onsuccess = () => r(q.result);
-    q.onerror = () => r(null);
-  } catch(e) { r(null); }
-});
-
-const idb = (m, f) => new Promise(r => {
-  if(!db) return r();
-  try {
-    const t = db.transaction('i', m), q = f(t.objectStore('i'));
-    t.oncomplete = () => r(q && q.result);
-    t.onerror = () => r();
-  } catch(e) { r(); }
-});
-
-function blobToDataURL(blob){
-  return new Promise(res => {
-    const r = new FileReader();
-    r.onloadend = () => res(r.result);
-    r.onerror = () => res(null);
-    r.readAsDataURL(blob);
-  });
-}
-
-async function fetchImageAsBase64(url){
-  try {
-    const res = await fetch(url, {mode: 'cors'});
-    if(res.ok){
-      const b = await res.blob();
-      return await blobToDataURL(b);
-    }
-  } catch(e){}
-
-  const proxies = [
-    'https://api.allorigins.win/raw?url=',
-    'https://corsproxy.io/?'
+  /* ---------- Plan de animaciones de entrada ----------
+     [selector(@indice), animación, retraso inicial (s), escalón entre elementos (s), opciones] */
+  const common = [
+    ['.brand-logo','down',.35],
+    ['.bg-wheel-wrap','wheel',.1,0,{dur:1.9,ease:'cubic-bezier(.16,1,.3,1)'}],
+    ['.bg-drum-wrap','up',.7],
+    ['.bg-gear-wrap','up',.8],
+    ['h2','left',.5,0,{dur:.9}]
   ];
-  for(const p of proxies){
-    try {
-      const res = await fetch(p + encodeURIComponent(url));
-      if(res.ok){
-        const b = await res.blob();
-        return await blobToDataURL(b);
-      }
-    } catch(e){}
-  }
-  return null;
-}
-
-async function preloadDefaultImages(){
-  const items = [
-    {k: 'def_logo_b64', u: 'https://www.cargasespeciales.com/imagenes/logo_seo.jpg', sel: '.brand-logo img, .cv-logo-box img'},
-    {k: 'def_brands_b64', u: 'https://www.cargasespeciales.com/imagenes/logos_neumaticos.jpg', sel: '.brand-showcase-giant img'}
+  const plan = [
+    /* 1 Portada */
+    [['.cv-wheel','wheel',0,0,{dur:2.8,ease:'cubic-bezier(.16,1,.3,1)'}],
+     ['.cv-logo-box','down',.55,0,{dur:.9}],
+     ['.cv-mid .plus','zoom',.95,0,{dur:.8}],
+     ['.cv-mid h1','left',1.15,0,{dur:.9}],
+     ['.cv-sub b','up',1.55],
+     ['.cv-sub span','zoom',1.85,0,{dur:.7}],
+     ['.cv-row .slot','skew',2,.14,{dur:.9}]],
+    /* 2 Quiénes somos */
+    [...common,
+     ['.lead','up',.7],
+     ['.sub@0','up',.9],
+     ['.dest div','pop',1.05,.13],
+     ['.dest i','zoom',1.35,.13,{dur:.5}],
+     ['.zone','wipe',1.5,0,{dur:.9}],
+     ['.sub@1','up',1.7],
+     ['.prods div','up',1.85,.09]],
+    /* 3 Marcas */
+    [...common,
+     ['.brand-showcase-giant','zoom',.75,0,{dur:1.1}]],
+    /* 4-6 Neumáticos */
+    [...common, ['.tire-grid-4x2 .slot','pop',.75,.08]],
+    [...common, ['.tire-grid-4x2 .slot','pop',.75,.08]],
+    [...common, ['.tire-grid-4x2 .slot','pop',.75,.08]],
+    /* 7 Catálogo */
+    [...common,
+     ['.catalog-list','fade',.7,0,{dur:.5}],
+     ['.catalog-list div','row',.8,.05,{dur:.6}],
+     ['.catalog-bar','wipe',1.6,0,{dur:.9}]],
+    /* 8 Repuestos */
+    [...common,
+     ['.lead','up',.7],
+     ['.rf-card-big','pop',.9,.2,{dur:.9}],
+     ['.rf-tag-big','zoom',1.3,.07,{dur:.5}],
+     ['.rf-zone','wipe',1.7,0,{dur:.9}]],
+    /* 9 Lubricantes */
+    [...common,
+     ['.lead','up',.7],
+     ['.strip .slot','pop',.9,.14]],
+    /* 10 Contacto */
+    [['.brand-logo','down',.35],
+     ['.bg-wheel-wrap','wheel',.1,0,{dur:1.9,ease:'cubic-bezier(.16,1,.3,1)'}],
+     ['.contact-pill','left',.45],
+     ['h2','left',.6,0,{dur:.9}],
+     ['.lead','up',.85],
+     ['.contact-card','pop',1,.12],
+     ['.contact-zone','wipe',1.55,0,{dur:.9}],
+     ['.contact-photo-card','pop',1.7,.12]]
   ];
-  for(const it of items){
-    let b64 = await idb('readonly', st => st.get(it.k));
-    if(!b64){
-      b64 = await fetchImageAsBase64(it.u);
-      if(b64) await idb('readwrite', st => st.put(b64, it.k));
-    }
-    if(b64){
-      document.querySelectorAll(it.sel).forEach(img => {
-        if(img.src !== b64) img.src = b64;
+
+  pages.forEach((p, i) => {
+    (plan[i] || []).forEach(([sel, an, start, step = 0, o = {}]) => {
+      let els; const at = sel.match(/^(.*)@(\d+)$/);
+      if(at){ const e = p.querySelectorAll(at[1])[+at[2]]; els = e ? [e] : []; }
+      else els = [...p.querySelectorAll(sel)];
+      els.forEach((el, k) => {
+        el.classList.add('a'); el.dataset.an = an;
+        el.style.setProperty('--d', (start + k * step).toFixed(2) + 's');
+        if(o.dur)  el.style.setProperty('--dur', o.dur + 's');
+        if(o.ease) el.style.setProperty('--ease', o.ease);
       });
-    }
-  }
-}
-
-// Captura fiel mediante html2canvas con reemplazo de object-fit
-const shot = async (el) => {
-  return await html2canvas(el, {
-    scale: 3,
-    useCORS: true,
-    allowTaint: false,
-    logging: false,
-    imageTimeout: 15000,
-    scrollX: 0,
-    scrollY: 0,
-    x: 0,
-    y: 0,
-    width: el.offsetWidth,
-    height: el.offsetHeight,
-    onclone: (doc) => {
-      doc.querySelectorAll('img').forEach(img => {
-        const cs = doc.defaultView.getComputedStyle(img);
-        const fit = cs.objectFit;
-        if (!fit || fit === 'fill') return;
-        const d = doc.createElement('div');
-        d.style.cssText = 'display:block;width:' + (cs.width || '100%') + ';height:' + (cs.height || '100%') + ';' +
-          'background-image:url("' + (img.currentSrc || img.src) + '");background-repeat:no-repeat;' +
-          'background-size:' + (fit === 'cover' ? 'cover' : fit === 'contain' ? 'contain' : 'auto') + ';' +
-          'background-position:' + (cs.objectPosition || '50% 50%') + ';';
-        img.parentNode.replaceChild(d, img);
-      });
-    },
-    backgroundColor: el.classList.contains('dark') ? '#141416' : '#ffffff'
-  });
-};
-
-const btn = document.getElementById('pdf'), btnP = document.getElementById('pptx');
-
-async function saveFile(name, blob){
-  let dl = null;
-  try { dl = window.claude ? await window.claude.use('downloads') : null; } catch(e){}
-  if(dl){
-    await dl.save({filename: name, data: blob});
-  } else {
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = name;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  }
-}
-
-async function run(b, label, fn){
-  const t = b.textContent;
-  btn.disabled = btnP.disabled = true;
-  b.textContent = label;
-  const wasPres = isPresMode;
-  if(wasPres) exitPresMode();
-  document.body.classList.add('exporting', 'static-mode');
-  stage.style.zoom = 1;
-  window.scrollTo(0, 0);
-  try {
-    if(document.fonts && document.fonts.ready) await document.fonts.ready;
-    await preloadDefaultImages();
-    await fn();
-  } catch(e) {
-    if(!(e && e.code === 'declined')){
-      console.error(e);
-      showToast('No se pudo exportar: ' + ((e && e.message) || e));
-    }
-  } finally {
-    document.body.classList.remove('exporting');
-    if(!isStaticMode) document.body.classList.remove('static-mode');
-    stage.style.zoom = '';
-    fit();
-    if(wasPres) enterPresMode();
-    btn.disabled = btnP.disabled = false;
-    b.textContent = t;
-  }
-}
-
-// --- EXPORTAR A PDF (297x210 mm exactas) ---
-btn.onclick = () => run(btn, 'Generando PDF…', async () => {
-  const allPages = [...document.querySelectorAll('.page')];
-  const jsPDF = window.jspdf && window.jspdf.jsPDF;
-  if(!jsPDF) throw new Error('No cargó la librería jsPDF');
-  const pdf = new jsPDF({orientation: 'landscape', unit: 'mm', format: [297, 210], compress: true});
-
-  for(let i = 0; i < allPages.length; i++){
-    const c = await shot(allPages[i]);
-    const imgData = c.toDataURL('image/jpeg', 0.98);
-    if(i > 0) pdf.addPage([297, 210], 'landscape');
-    pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210, undefined, 'FAST');
-  }
-  await saveFile('SEO-Repuestos-Brochure.pdf', pdf.output('blob'));
-});
-
-// --- EXPORTAR A PPTX (Captura 1:1 original fiel) ---
-btnP.onclick = () => run(btnP, 'Generando PPTX…', async () => {
-  const allPages = [...document.querySelectorAll('.page')];
-  if(typeof PptxGenJS === 'undefined') throw new Error('No cargó PptxGenJS');
-  const px = new PptxGenJS();
-  px.defineLayout({name: 'A4L', width: 11.693, height: 8.268});
-  px.layout = 'A4L';
-  px.title = 'SEO Repuestos SpA · Presentación';
-
-  for(const p of allPages){
-    const c = await shot(p);
-    px.addSlide().addImage({
-      data: c.toDataURL('image/jpeg', 0.98),
-      x: 0,
-      y: 0,
-      w: 11.693,
-      h: 8.268
     });
+  });
+
+  /* ---------- Estado y navegación ---------- */
+  const played = new Set();
+  let cur = 0;
+  const bar = document.getElementById('bar'), count = document.getElementById('count');
+  const dotsEl = document.getElementById('dots');
+  const prevBtns = [document.getElementById('prev'), document.getElementById('edgePrev')];
+  const nextBtns = [document.getElementById('next'), document.getElementById('edgeNext')];
+
+  pages.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.setAttribute('aria-label', 'Ir a la diapositiva ' + (i + 1));
+    d.onclick = () => go(i);
+    dotsEl.appendChild(d);
+  });
+  const dots = [...dotsEl.children];
+
+  function countUp(){
+    const el = pages[0].querySelector('.cv-mid .plus');
+    if(!el || reduced) return;
+    el.textContent = '+0';
+    const t0 = performance.now() + 950, dur = 1500, target = 10;
+    (function tick(t){
+      const k = Math.max(0, Math.min(1, (t - t0) / dur));
+      el.textContent = '+' + Math.round(target * (1 - Math.pow(1 - k, 3)));
+      if(k < 1) requestAnimationFrame(tick);
+    })(performance.now());
   }
-  await saveFile('SEO-Repuestos-Brochure.pptx', await px.write({outputType: 'blob'}));
-});
 
-// ---- GESTIÓN DE ESPACIOS FOTOGRÁFICOS ----
-const slots = [...document.querySelectorAll('.slot')];
-const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.hidden = true; document.body.appendChild(inp);
-let target = null;
+  function play(i){                      // la animación de entrada solo corre una vez por diapositiva
+    if(played.has(i)) return;
+    played.add(i);
+    pages[i].classList.add('played');
+    if(i === 0) countUp();
+  }
 
-const shrink = f => new Promise((res, rej) => {
-  const u = URL.createObjectURL(f), im = new Image();
-  im.onload = () => {
-    const s = Math.min(1, 2000 / Math.max(im.width, im.height)), c = document.createElement('canvas');
-    c.width = im.width * s; c.height = im.height * s;
-    c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
-    URL.revokeObjectURL(u);
-    res(c.toDataURL('image/jpeg', .95));
-  };
-  im.onerror = rej; im.src = u;
-});
+  function render(){
+    pages.forEach((p, i) => {
+      p.classList.toggle('is-active', i === cur);
+      p.classList.toggle('is-before', i < cur);
+      p.classList.toggle('is-after', i > cur);
+      p.setAttribute('aria-hidden', i !== cur);
+    });
+    dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+    count.textContent = (cur + 1) + ' / ' + N;
+    bar.style.width = ((cur + 1) / N * 100) + '%';
+    prevBtns.forEach(b => b.disabled = cur === 0);
+    nextBtns.forEach(b => b.disabled = cur === N - 1);
+    history.replaceState(null, '', '#' + (cur + 1));
+  }
 
-const paint = (s, u) => { s.style.backgroundImage = u ? 'url("' + u + '")' : ''; s.classList.toggle('full', !!u); };
-async function setImg(s, f){
-  if(!f || !f.type.startsWith('image/')) return;
-  try {
-    const u = await shrink(f);
-    paint(s, u);
-    idb('readwrite', st => st.put(u, s.dataset.k));
-  } catch(e){}
-}
+  let booted = false;
+  function go(n){
+    n = Math.max(0, Math.min(N - 1, n));
+    if(n === cur) return;
+    cur = n; render();
+    if(booted) play(cur);
+  }
+  const next = () => go(cur + 1), prev = () => go(cur - 1);
+  prevBtns.forEach(b => b.onclick = prev);
+  nextBtns.forEach(b => b.onclick = next);
 
-const cnt = {};
-slots.forEach(s => {
-  const g = s.dataset.g;
-  cnt[g] = (cnt[g] || 0) + 1;
-  const n = cnt[g];
-  s.dataset.k = g + n;
-
-  let lab = '';
-  if(g === 't') lab = 'Foto ' + n;
-  else if(g === 'cov') lab = 'Portada ' + n;
-  else if(g === 'ct') lab = 'Cierre ' + n;
-  else if(g === 'l') lab = 'Lubricante ' + n;
-  else if(g === 'flt') lab = 'Filtro ' + n;
-  else if(g === 'frn') lab = 'Frenos ' + n;
-  else lab = 'Espacio ' + n;
-
-  s.innerHTML = '<div class="n">' + lab + '<small>clic o arrastra</small></div><button class="x" aria-label="Quitar">×</button>';
-  s.tabIndex = 0; s.setAttribute('role', 'button'); s.setAttribute('aria-label', lab);
-  s.onclick = e => {
-    if(e.target.classList.contains('x')){
-      e.stopPropagation();
-      paint(s, '');
-      idb('readwrite', st => st.delete(s.dataset.k));
-      return;
+  /* Teclado */
+  addEventListener('keydown', e => {
+    if(e.ctrlKey || e.metaKey || e.altKey) return;
+    switch(e.key){
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': case 'Enter': e.preventDefault(); next(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp': case 'Backspace': e.preventDefault(); prev(); break;
+      case 'Home': go(0); break;
+      case 'End': go(N - 1); break;
+      case 'f': case 'F': toggleFS(); break;
     }
-    target = s; inp.click();
-  };
-  s.onkeydown = e => {
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); target = s; inp.click(); }
-  };
-  s.ondragover = e => { e.preventDefault(); s.classList.add('over'); };
-  s.ondragleave = () => s.classList.remove('over');
-  s.ondrop = e => { e.preventDefault(); s.classList.remove('over'); setImg(s, e.dataTransfer.files[0]); };
-});
+  });
 
-inp.onchange = () => { setImg(target, inp.files[0]); inp.value = ''; };
+  /* Rueda del ratón / trackpad */
+  let lock = false;
+  addEventListener('wheel', e => {
+    e.preventDefault();
+    if(lock || Math.abs(e.deltaY) + Math.abs(e.deltaX) < 25) return;
+    lock = true; setTimeout(() => lock = false, 900);
+    (e.deltaY + e.deltaX) > 0 ? next() : prev();
+  }, {passive: false});
 
-// Inicialización de imágenes
-(async () => {
-  db = await openDB();
-  await preloadDefaultImages();
-  for(const s of slots){
-    const v = await idb('readonly', st => st.get(s.dataset.k));
-    if(s.dataset.default) paint(s, s.dataset.default);
-    else if(v) paint(s, v);
+  /* Gestos táctiles */
+  let sx = 0, sy = 0;
+  addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive: true});
+  addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) dx < 0 ? next() : prev();
+  }, {passive: true});
+  addEventListener('hashchange', () => { const n = parseInt(location.hash.slice(1), 10); if(n) go(n - 1); });
+
+  /* Pantalla completa */
+  const fsBtn = document.getElementById('fs');
+  const de = document.documentElement;
+  if(!(de.requestFullscreen || de.webkitRequestFullscreen)) fsBtn.style.display = 'none';
+  function toggleFS(){
+    if(document.fullscreenElement || document.webkitFullscreenElement)
+      (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    else (de.requestFullscreen || de.webkitRequestFullscreen).call(de);
+  }
+  fsBtn.onclick = toggleFS;
+
+  /* Controles: aparecen al mover el mouse / tocar y se ocultan solos */
+  let idle;
+  function showUI(){
+    document.body.classList.add('ui');
+    clearTimeout(idle);
+    idle = setTimeout(() => document.body.classList.remove('ui'), 2800);
+  }
+  ['pointermove', 'pointerdown', 'keydown'].forEach(ev => addEventListener(ev, showUI, {passive: true}));
+
+  /* ---------- Arranque: espera tipografías y fotos de portada y recién ahí anima ---------- */
+  const startHash = parseInt(location.hash.slice(1), 10);
+  if(startHash >= 1 && startHash <= N) cur = startHash - 1;
+  render();
+
+  const urlOf = el => (el.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/) || [])[1];
+  const loadImg = u => new Promise(r => { if(!u) return r(); const i = new Image(); i.onload = i.onerror = r; i.src = u; });
+  const firstImgs = [...pages[cur].querySelectorAll('.slot')].map(urlOf)
+    .concat([...pages[cur].querySelectorAll('img')].map(i => i.src));
+  const assets = Promise.all([
+    document.fonts && document.fonts.ready ? document.fonts.ready : 0,
+    ...firstImgs.map(loadImg)
+  ]);
+  Promise.race([assets, new Promise(r => setTimeout(r, 3000))]).then(() => {
+    document.body.classList.add('ready');
+    booted = true;
+    setTimeout(() => play(cur), 250);
+    showUI();
+    // precarga del resto de fotos para que las transiciones no muestren huecos
+    setTimeout(() => {
+      pages.forEach(p => p.querySelectorAll('.slot').forEach(el => loadImg(urlOf(el))));
+      loadImg('https://www.cargasespeciales.com/imagenes/logos_neumaticos.jpg');
+    }, 1200);
+  });
+
+  /* Aviso en celulares en vertical */
+  if(innerHeight > innerWidth && innerWidth < 760){
+    const h = document.getElementById('hint');
+    setTimeout(() => h.classList.add('show'), 900);
+    setTimeout(() => h.classList.remove('show'), 5500);
   }
 })();
 </script>
